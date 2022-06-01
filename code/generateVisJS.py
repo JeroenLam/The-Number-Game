@@ -85,7 +85,7 @@ def find_pairs(N, debug_toggle = 0):
         step += 1
 
 if __name__ == '__main__':
-    N = 10
+    N = 100
 
     node_id = 1
     nodes = []
@@ -118,7 +118,9 @@ if __name__ == '__main__':
         baseNodeId = node_lookup[tempNodes[0]]
         for idx in range(1, size):
             newNodeId = node_lookup[tempNodes[idx]]
-            edges.append({"from": baseNodeId, "to": newNodeId, "color": edge_col_a1})
+            edges.append({"from": baseNodeId,
+                          "to": newNodeId,
+                          "color": edge_col_a1})
             baseNodeId = newNodeId
 
 

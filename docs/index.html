@@ -6,6 +6,7 @@
         <script type="text/javascript" src="https://unpkg.com/vis-data@latest/peer/umd/vis-data.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/vis-network@latest/peer/umd/vis-network.min.js"></script>
         <script type="text/javascript" src="networks.js"></script>
+        <script type="text/javascript" src="model.js"></script>
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/vis-network/styles/vis-network.min.css" />
         <link rel="stylesheet" href="style.css">
         <!-- You may include other packages like Vis Timeline or Vis Graph3D here. -->
@@ -14,6 +15,8 @@
     <body onload="onPageLoad()">
 
         <h1>The Number Game</h1>
+
+        <button type="button" onclick="find_pairs(10, 1);">Test js code</button>
 
         <div id="mynetwork" class="networkClass"></div>
     </body>
