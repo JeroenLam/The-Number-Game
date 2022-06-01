@@ -84,6 +84,8 @@ def find_pairs(N, debug_toggle = 0):
         step += 1
 
 if __name__ == '__main__':
-    print('N, removed, left, total, steps')
-    for idx in range(1, 100):
-        find_pairs(idx + 1)
+    # print('N, removed, left, total, steps')
+    # for idx in range(1, 100):
+    #     find_pairs(idx + 1)
+
+    find_pairs(10, 1)
