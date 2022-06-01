@@ -1,0 +1,11 @@
+
+body {
+    background-color: #b1b1b1;
+}
+
+.networkClass {
+    background-color: #ffffff;
+    height: 500pt;
+    border: 4px solid;
+    border-radius: 25px;
+}
