@@ -1,6 +1,3 @@
-N = 100
-
-
 # Helper functions to regenerate the sums/products data structures every round.
 # Not optimal but hey this is for fun.
 def generate_sums(candidate_pairs):
@@ -27,7 +24,7 @@ def generate_products(candidate_pairs):
     return products
 
 
-def find_pairs():
+def find_pairs(N, debug_toggle = 0):
     # First, generate all possible pairs from (1, 1) to (N-1, N-1).
     candidate_pairs = set()
     for i in range(1, N):
@@ -36,40 +33,57 @@ def find_pairs():
 
     # Swap between hearing from Peter or Sandy every round (product or sum)
     do_not_know_product = True
-    round = 1
+    number_removed = 0
+    step = 1
+    total_removed = 0
+    total_elements = len(candidate_pairs)
     while True:
         sums = generate_sums(candidate_pairs)
         products = generate_products(candidate_pairs)
-        # First, check if there's a single product left with one pair.
-        if round == 15:
-            for product in products:
-                if len(products[product]) == 1:
-                    print('Peter: I do know the numbers')
-                    print(products[product][0])
-                    return
+        number_removed = 0
 
         if do_not_know_product:
-            print('Peter: I don\'t know the numbers')
             # Go through products. For any product that only has a single pair,
             # we can remove those from the candidates for the next round.
             for product in products:
                 if len(products[product]) == 1:
                     tuple_pair = products[product][0]
                     # Remove from candidates.
+                    if debug_toggle:
+                        print(tuple_pair)
                     candidate_pairs.remove(tuple_pair)
+                    number_removed += 1
+            if debug_toggle:
+                print(f'Step {step}: Peter removes {number_removed} elements:')
             do_not_know_product = False
         else:
-            print('Sandy: I don\'t know the numbers')
             # Go through sums. For any product that only has a single pair,
             # we can remove those from the candidates for the next round.
             for sum in sums:
                 if len(sums[sum]) == 1:
                     tuple_pair = sums[sum][0]
                     # Remove from candidates.
+                    if debug_toggle:
+                        print(tuple_pair)
                     candidate_pairs.remove(tuple_pair)
+                    number_removed += 1
+            if debug_toggle:
+                print(f'Step {step}: Sandy removes {number_removed} elements:')
             do_not_know_product = True
-        round += 1
 
+        total_removed += number_removed
+
+        if number_removed == 0:
+            if debug_toggle:
+                print(f'Removed a total of {total_removed} elements')
+                print(f'{len(candidate_pairs)} / {total_elements} elements left that do not converge')
+                print(candidate_pairs)
+            else:
+                print(f'{N}, {total_removed}, {len(candidate_pairs)}, {total_elements}, {step}')
+            return
+        step += 1
 
 if __name__ == '__main__':
-    find_pairs()
+    print('N, removed, left, total, steps')
+    for idx in range(1, 100):
+        find_pairs(idx + 1)
