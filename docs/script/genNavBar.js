@@ -5,7 +5,7 @@ const navBarItems = [
     ["Generalisability", "/The-Number-Game/Generalisability"],
     ["RNG bound", "/The-Number-Game/RNGbound"],
     ["Demo", "/The-Number-Game/WebDemo"],
-    ["Github", "https://github.com/JeroenLam/The-Number-Game", "/images/GitHub-Mark-32px.png"],
+    ["Github", "https://github.com/JeroenLam/The-Number-Game", "/The-Number-Game/images/GitHub-Mark-32px.png"],
 ];
 
 function genNavBar(navBarDivId)
