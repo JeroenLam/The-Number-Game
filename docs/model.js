@@ -55,6 +55,9 @@ function find_pairs(N, iterations)
     sums = generate_sums(candidate_pairs);
     products = generate_products(candidate_pairs);
 
+    // Allocate a array to keep track of the removed nodes
+    removedNodes = [];
+
     // Simulate 'iterations' times noting that you do not know the numbers
     for (let iter = 0; iter < iterations; ++iter)
     {
@@ -62,16 +65,23 @@ function find_pairs(N, iterations)
         sums = generate_sums(candidate_pairs);
         products = generate_products(candidate_pairs);
 
+        // Add a empty array to removedNodes array at index 'iter'
+        removedNodes.push([]);
+
         // Check who's turn it is
         if (do_not_know_product)
         {
             // Go through products. For any product that only has a single pair,
             // we can remove those from the candidates for the next round.
+            // Agent 2 (Bob) : Blue
             products.forEach(function(value, key) {
                 // Check how many pairs satisfy the product
                 if (value.length == 1)
-                    // Remove from candidate pairs
+                {
+                    // Remove from candidate pairs 
+                    removedNodes[iter].push(value[0]);
                     candidate_pairs.delete(value[0]);
+                }
             });
             do_not_know_product = false
         }
@@ -79,11 +89,15 @@ function find_pairs(N, iterations)
         {
             // Go through sums. For any product that only has a single pair,
             // we can remove those from the candidates for the next round.
+            // Agent 1 (Alice) : red
             sums.forEach(function(value, key) {
                 // Check how many pairs satisfy the product
                 if (value.length == 1)
+                {
                     // Remove from candidate pairs
+                    removedNodes[iter].push(value[0]);
                     candidate_pairs.delete(value[0]);
+                }
             });
             do_not_know_product = true
         }
@@ -138,5 +152,37 @@ function find_pairs(N, iterations)
             baseNode = newNode;
         }
     });
-    return [nodes, edges];
+    return [nodes, edges, removedNodes];
+}
+
+function renderRemovedNodes(removedNodes, removedListId)
+{
+    const element = document.getElementById(removedListId);
+    element.innerHTML = "";
+    // Create output string by looping over elements
+    for (let idx = 0, max = removedNodes.length; idx < max; ++idx)
+    {
+        text = ""
+        if (idx % 2 == 0)
+        {
+            text += "<div class='bobRemoved'>";
+
+            text += "<p>" + (idx + 1) + ") Bob: I do not know the numbers:</p>";
+            removedNodes[idx].forEach (function(pair) {
+                text += "(" + pair[0] + "," + pair[1] + "), ";
+            });
+
+            text += "</div>";
+        }
+        else
+        {
+            text += "<div class='aliceRemoved'>";
+            text += "<p>" + (idx + 1) + ") Alice: I do not know the numbers:</p>";
+            removedNodes[idx].forEach (function(pair) {
+                text += "(" + pair[0] + "," + pair[1] + "), ";
+            });
+            text += "</div>";
+        }
+        element.innerHTML += text;
+    }
 }

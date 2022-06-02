@@ -9,3 +9,47 @@ body {
     border: 4px solid;
     border-radius: 25px;
 }
+
+.aliceRemoved {
+    background-color: #ff000040;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 4pt;
+    margin-bottom: 4pt;
+}
+
+.bobRemoved {
+    background-color: #0000ff40;;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 4pt;
+    margin-bottom: 4pt;
+}
+
+
+.nobr { 
+    white-space: nowrap;
+    display: inline;
+}
+
+.column50 {
+    float: left;
+    width: 50%;
+}
+
+.column48 {
+    float: left;
+    width: 48%;
+}
+
+.column4 {
+    float: left;
+    width: 4%;
+}
+  
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

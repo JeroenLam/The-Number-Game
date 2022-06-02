@@ -19,10 +19,12 @@ function onPageLoad(N, iter, networkId)
 }
 
 // Create network from html input
-function setNetwork(NVarId, iterVarId, networkId)
+function setNetwork(NVarId, iterVarId, networkId, removedListId)
 {
     N = parseInt(document.getElementById(NVarId).textContent);
     iter = parseInt(document.getElementById(iterVarId).textContent);
     ret = find_pairs(N, iter);
     createNetwork(networkId, ret[0], ret[1]);
+    console.log(ret);
+    renderRemovedNodes(ret[2], removedListId);
 }
