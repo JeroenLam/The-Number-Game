@@ -136,3 +136,5 @@ function find_pairs(N, iterations)
     });
     return [nodes, edges];
 }
+
+// TODO: Add html elements and make network interactable
