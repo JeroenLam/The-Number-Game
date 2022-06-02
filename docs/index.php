@@ -5,17 +5,19 @@
         <meta charset="UTF-8">
         <script type="text/javascript" src="https://unpkg.com/vis-data@latest/peer/umd/vis-data.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/vis-network@latest/peer/umd/vis-network.min.js"></script>
-        <script type="text/javascript" src="networks.js"></script>
-        <script type="text/javascript" src="model.js"></script>
-        <script type="text/javascript" src="support.js"></script>
+        <script type="text/javascript" src="/script/networks.js"></script>
+        <script type="text/javascript" src="/script/model.js"></script>
+        <script type="text/javascript" src="/script/support.js"></script>
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/vis-network/styles/vis-network.min.css" />
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/style.css">
     </head>
 
     <body onload="onPageLoad(10, 0, 'mynetwork')">
+        <!-- Import navigation bar -->
+        <?php	include('bar.php'); ?>
+
 
         <h1>The Number Game</h1>
-
         
         <!-- Input for the number of nodes -->
         <div>
