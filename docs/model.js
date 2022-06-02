@@ -51,6 +51,10 @@ function find_pairs(N, iterations)
     // Swap between hearing from the agents every round (product or sum)
     do_not_know_product = true;
 
+    // Compute the initial set of sums and products
+    sums = generate_sums(candidate_pairs);
+    products = generate_products(candidate_pairs);
+
     // Simulate 'iterations' times noting that you do not know the numbers
     for (let iter = 0; iter < iterations; ++iter)
     {
@@ -129,12 +133,10 @@ function find_pairs(N, iterations)
             edges.push({
                 'from': node_lookup.get(baseNode),
                 'to':   node_lookup.get(newNode),
-                'color': 'rgb(255,0,0)'
+                'color': 'rgb(0,0,255)'
             });
             baseNode = newNode;
         }
     });
     return [nodes, edges];
 }
-
-// TODO: Add html elements and make network interactable

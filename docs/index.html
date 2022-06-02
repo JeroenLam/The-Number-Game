@@ -7,17 +7,35 @@
         <script type="text/javascript" src="https://unpkg.com/vis-network@latest/peer/umd/vis-network.min.js"></script>
         <script type="text/javascript" src="networks.js"></script>
         <script type="text/javascript" src="model.js"></script>
+        <script type="text/javascript" src="support.js"></script>
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/vis-network/styles/vis-network.min.css" />
         <link rel="stylesheet" href="style.css">
         <!-- You may include other packages like Vis Timeline or Vis Graph3D here. -->
     </head>
 
-    <body onload="onPageLoad()">
+    <body onload="onPageLoad(10, 0, 'mynetwork')">
 
         <h1>The Number Game</h1>
 
-        <button type="button" onclick="find_pairs(10, 1);">Test js code</button>
+        <button type="button" onclick="setNetwork('N_var', 'iter_var', 'mynetwork');">Test js code</button>
+        
+        <!-- Input for the number of nodes -->
+        <div><nobr>
+            Bound for the random numbers: 
+            <div id="N_var">10</div>
+            <button type="button" onclick="incrementDiv('N_var', 20);">+</button>
+            <button type="button" onclick="decrementDiv('N_var',  1);">-</button>
+        </nobr></div>
 
+        <!-- Input for the number of iterations to run the model -->
+        <div> 
+            Bound for the random numbers: 
+            <div id="iter_var">0</div>
+            <button type="button" onclick="incrementDiv('iter_var', 30);">+</button>
+            <button type="button" onclick="decrementDiv('iter_var',  0);">-</button>
+        </div>
+
+        <hr>
         <div id="mynetwork" class="networkClass"></div>
     </body>
 </html>
