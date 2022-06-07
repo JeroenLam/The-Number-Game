@@ -25,6 +25,7 @@ function setNetwork(NminVarId, NmaxVarId, iterVarId, radioAId, radioBId, transId
     // Parse random number bound
     Nmin = parseInt(document.getElementById(NminVarId).textContent);
     Nmax = parseInt(document.getElementById(NmaxVarId).textContent);
+    
     // Parse number of iterations to run
     iter = parseInt(document.getElementById(iterVarId).textContent);
     // Parse Alice starts or bob starts

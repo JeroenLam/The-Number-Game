@@ -118,7 +118,8 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
         // Create node in network
         nodes.push({
             'id':    node_id,
-            'label': '(' + pair[0] + ',' + pair[1] + ')'
+            'label': '(' + pair[0] + ',' + pair[1] + ')',
+            'shape': 'circle'
         });
         // Add node to lookup table to retreive id
         node_lookup.set(pair, node_id);
