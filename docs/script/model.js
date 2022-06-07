@@ -205,7 +205,7 @@ function renderRemovedNodes(removedNodes, removedListId, startingAgent)
     for (let idx = 0, max = removedNodes.length; idx < max; ++idx)
     {
         text = ""
-        if ((idx + startingAgent - 1) % 2 == 0)
+        if ((idx + startingAgent) % 2 == 0)
         {
             text += "<div class='bobRemoved'>";
 

@@ -33,7 +33,6 @@ function setNetwork(NminVarId, NmaxVarId, iterVarId, radioAId, radioBId, transId
         startingAgent = 1;
     if (document.getElementById(radioBId).checked) 
         startingAgent = 2;
-    console.log(startingAgent);
     
     // Parse if we render the transitive relations
     transVal = document.getElementById(transId).checked;
