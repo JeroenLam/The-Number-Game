@@ -40,7 +40,7 @@ function generate_products(candidate_pairs)
     return products;
 }
 
-function find_pairs(N, iterations)
+function find_pairs(N, iterations, startingAgent)
 {
     // Generate all possible pairs
     candidate_pairs = new Set();
@@ -49,7 +49,10 @@ function find_pairs(N, iterations)
             candidate_pairs.add([x, y]);
     
     // Swap between hearing from the agents every round (product or sum)
-    do_not_know_product = true;
+    if (startingAgent == 1) // Alice
+        do_not_know_product = false;
+    if (startingAgent == 2) // Bob
+        do_not_know_product = true;
 
     // Compute the initial set of sums and products
     sums = generate_sums(candidate_pairs);
@@ -98,7 +101,7 @@ function find_pairs(N, iterations)
             });
             do_not_know_product = true
         }
-        
+
         // Compute the set of sums and products
         sums = generate_sums(candidate_pairs);
         products = generate_products(candidate_pairs);
@@ -127,39 +130,71 @@ function find_pairs(N, iterations)
     console.log(sums);
     console.log(products);
 
+    // ==============================================================
+    // No transitive relations
+    // ==============================================================
+    // // Convert all sums relations into edges of agent 1
+    // sums.forEach (function(arr, key) {
+    //     baseNode = arr[0];
+    //     for (let idx = 1, max = arr.length; idx < max; ++idx)
+    //     {
+    //         newNode = arr[idx];
+    //         edges.push({
+    //             'from': node_lookup.get(baseNode),
+    //             'to':   node_lookup.get(newNode),
+    //             'color': 'rgb(255,0,0)'
+    //         });
+    //         baseNode = newNode;
+    //     }
+    // });
+    // // Convert all products relations into edges of agent 2
+    // products.forEach (function(arr, key) {
+    //     baseNode = arr[0];
+    //     for (let idx = 1, max = arr.length; idx < max; ++idx)
+    //     {
+    //         newNode = arr[idx];
+    //         edges.push({
+    //             'from': node_lookup.get(baseNode),
+    //             'to':   node_lookup.get(newNode),
+    //             'color': 'rgb(0,0,255)'
+    //         });
+    //         baseNode = newNode;
+    //     }
+    // });
+
+    // ==============================================================
+    // No transitive relations
+    // ==============================================================
     // Convert all sums relations into edges of agent 1
     sums.forEach (function(arr, key) {
-        baseNode = arr[0];
-        for (let idx = 1, max = arr.length; idx < max; ++idx)
-        {
-            newNode = arr[idx];
-            edges.push({
-                'from': node_lookup.get(baseNode),
-                'to':   node_lookup.get(newNode),
-                'color': 'rgb(255,0,0)'
-            });
-            baseNode = newNode;
+        for (let idx1 = 0; idx < arr.length; ++idx){
+            for (let idx2 = 0; idx < arr.length; ++idx){
+                edges.push({
+                    'from': node_lookup.get(arr[idx1]),
+                    'to':   node_lookup.get(arr[idx2]),
+                    'color': 'rgb(255,0,0)'
+                });
+            }
+        }
+    });
+    // Convert all products relations into edges of agent 2
+    products.forEach (function(arr, key) {
+        for (let idx1 = 0; idx < arr.length; ++idx){
+            for (let idx2 = 0; idx < arr.length; ++idx){
+                edges.push({
+                    'from': node_lookup.get(arr[idx1]),
+                    'to':   node_lookup.get(arr[idx2]),
+                    'color': 'rgb(0,0,255)'
+                });
+            }
         }
     });
 
-    // Convert all products relations into edges of agent 2
-    products.forEach (function(arr, key) {
-        baseNode = arr[0];
-        for (let idx = 1, max = arr.length; idx < max; ++idx)
-        {
-            newNode = arr[idx];
-            edges.push({
-                'from': node_lookup.get(baseNode),
-                'to':   node_lookup.get(newNode),
-                'color': 'rgb(0,0,255)'
-            });
-            baseNode = newNode;
-        }
-    });
+
     return [nodes, edges, removedNodes];
 }
 
-function renderRemovedNodes(removedNodes, removedListId)
+function renderRemovedNodes(removedNodes, removedListId, startingAgent)
 {
     const element = document.getElementById(removedListId);
     element.innerHTML = "";
@@ -167,7 +202,7 @@ function renderRemovedNodes(removedNodes, removedListId)
     for (let idx = 0, max = removedNodes.length; idx < max; ++idx)
     {
         text = ""
-        if (idx % 2 == 0)
+        if (idx % 2 == startingAgent % 2)
         {
             text += "<div class='bobRemoved'>";
 

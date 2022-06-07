@@ -34,6 +34,20 @@
             <button type="button" onclick="incrementDiv('iter_var', 30);" class=nobr>+</button>
             <button type="button" onclick="decrementDiv('iter_var',  0);" class=nobr>-</button>
         </div>
+
+        <!-- Toggle for starting agent -->
+        <!-- Toggle for transitive relations -->
+        <form>
+            <p> Starting agent:</p>
+            <input type="radio" id="aliceStart" name="alice" value="1">
+            <label for="aliceStart">Alice (+)</label> <br>
+            <input type="radio" id="bobStart" name="bob" value="2" checked>
+            <label for="bobStart">Bob (*)</label> <br>
+            
+            <p>Render transitive relations: 
+                <input type="checkbox" id="transitiveToggle" class="nobr">
+            </p>
+        </form>
         
         <!-- Button to update model and removed posibilities list -->
         <button type="button" onclick="setNetwork('N_var', 'iter_var', 'mynetwork', 'removedList');">Update model</button>
