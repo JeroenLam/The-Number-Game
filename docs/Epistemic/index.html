@@ -16,6 +16,32 @@
         <div id="navBar" class="topnav"></div>
         <div style='height:10px'></div>
         
-        Epistemic page
+        To think about the logic underlying the number game, we first need to think about what kind of logical system makes sense to use for the number game.
+Therefore, we first look at what kind of models we are considering.
+The most intuitive way of thinking of possible worlds is that they are possible combinations of the given numbers, for example (4,6).
+We then also need to have certain relations between the possible worlds, so let us say that we are in our example possible world, (4,6), and we have a number limit of 10.
+The product of these numbers is 24, and their sum is 10. This means that the 'product-possible' worlds are only (4,6) and (3,8).
+The 'sum-possible' worlds are (1,9), (2,8), (3,7), (4,6) and (5,5).
+We see that in a specific world, we have two types of connections; those connecting to worlds with the same sum, and those connecting to worlds with the same product.
+Since we have that the product and the sum of the numbers in a certain possible world are always the same, these relations, and therefore every possible model will always be reflexive.
+It is also given that if a world, for example (5,5) has a sum relation with (4,6), then there is also a sum-relation between (4,6) and (5,5); models have to be Euclidean.
+Additionally, we see that when we create a list of accessible worlds, they have some property that they share. Either their sum or their product will be the same.
+This implies that from the 'sum-possible' worlds when there is a 'sum'-connection between (4,6) and (5,5) and between (4,6) and (3,7), there has to be a connection between (5,5) and (3,7) because they all add up to 10.
+Models that we are considering therefore also have to be transitive.
+Since we are reasoning about knowledge and considering models that have to be reflexive, euclidean, and transitive, we make use of the corresponding modal logic system S5 for two agents.
+
+We can now write, using the usual notation of S5 for two agents, K<sub>a</sub>K<sub>b</sub>p with the meaning 'Alice knows that Bob knows that p'.
+
+Now that we know the logic system and types of models we are considering, it is the next step to look at what happens when Alice or Bob exclaims 'I do not know the numbers'.
+How does this update the possible worlds that we have to consider, and under what circumstance can Alice, who knows the sum (10) of the numbers or Bob, who knows their product (24) say 'I know the numbers'?
+To do this, we think back to our world (4,6). Assume we have a sum connection to the world (3,7). Can Alice know the numbers?
+Now assume the world (4,6) does not have any sum connections, does Alice now know the numbers? She has to, as there are no other worlds consistent with the knowledge that she has.
+This also means that if Alice does not know the numbers, then they are not 4 and 6.
+From this, it follows that when reasoning about possible worlds, at the update step following a proclamation, we have to stop considering the worlds that do not have sum or product connections.
+The proclamation 'I do not know' is therefore equivalent to stating 'The world is not a world which currently has a unique product/sum'.
+To Alice, these are the worlds which have a unique sum, and for Bob those with a unique product.
+These worlds are those which have a reflexive relation. We introduce the notation s⥈. as 'there exists a world t, with t not equal to s, such that sR.t'.
+Where the '.' can either be + or * to denote their type of relations. Then at every step, we drop those worlds that do not have this property.
+
     </body>
 </html>
