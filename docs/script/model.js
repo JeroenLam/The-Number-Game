@@ -40,12 +40,12 @@ function generate_products(candidate_pairs)
     return products;
 }
 
-function find_pairs(N, iterations, startingAgent)
+function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
 {
     // Generate all possible pairs
     candidate_pairs = new Set();
-    for (let x = 1; x < N; ++x)
-        for (let y = x; y < N; ++y)
+    for (let x = Nmin; x < Nmax; ++x)
+        for (let y = x; y < Nmax; ++y)
             candidate_pairs.add([x, y]);
     
     // Swap between hearing from the agents every round (product or sum)
@@ -127,68 +127,71 @@ function find_pairs(N, iterations, startingAgent)
 
     edges = [];
 
-    console.log(sums);
-    console.log(products);
-
     // ==============================================================
     // No transitive relations
     // ==============================================================
-    // // Convert all sums relations into edges of agent 1
-    // sums.forEach (function(arr, key) {
-    //     baseNode = arr[0];
-    //     for (let idx = 1, max = arr.length; idx < max; ++idx)
-    //     {
-    //         newNode = arr[idx];
-    //         edges.push({
-    //             'from': node_lookup.get(baseNode),
-    //             'to':   node_lookup.get(newNode),
-    //             'color': 'rgb(255,0,0)'
-    //         });
-    //         baseNode = newNode;
-    //     }
-    // });
-    // // Convert all products relations into edges of agent 2
-    // products.forEach (function(arr, key) {
-    //     baseNode = arr[0];
-    //     for (let idx = 1, max = arr.length; idx < max; ++idx)
-    //     {
-    //         newNode = arr[idx];
-    //         edges.push({
-    //             'from': node_lookup.get(baseNode),
-    //             'to':   node_lookup.get(newNode),
-    //             'color': 'rgb(0,0,255)'
-    //         });
-    //         baseNode = newNode;
-    //     }
-    // });
-
-    // ==============================================================
-    // No transitive relations
-    // ==============================================================
-    // Convert all sums relations into edges of agent 1
-    sums.forEach (function(arr, key) {
-        for (let idx1 = 0; idx < arr.length; ++idx){
-            for (let idx2 = 0; idx < arr.length; ++idx){
+    if (transTogle == 0)
+    {
+        // Convert all sums relations into edges of agent 1
+        sums.forEach (function(arr, key) {
+            baseNode = arr[0];
+            for (let idx = 1, max = arr.length; idx < max; ++idx)
+            {
+                newNode = arr[idx];
                 edges.push({
-                    'from': node_lookup.get(arr[idx1]),
-                    'to':   node_lookup.get(arr[idx2]),
+                    'from': node_lookup.get(baseNode),
+                    'to':   node_lookup.get(newNode),
                     'color': 'rgb(255,0,0)'
                 });
+                baseNode = newNode;
             }
-        }
-    });
-    // Convert all products relations into edges of agent 2
-    products.forEach (function(arr, key) {
-        for (let idx1 = 0; idx < arr.length; ++idx){
-            for (let idx2 = 0; idx < arr.length; ++idx){
+        });
+        // Convert all products relations into edges of agent 2
+        products.forEach (function(arr, key) {
+            baseNode = arr[0];
+            for (let idx = 1, max = arr.length; idx < max; ++idx)
+            {
+                newNode = arr[idx];
                 edges.push({
-                    'from': node_lookup.get(arr[idx1]),
-                    'to':   node_lookup.get(arr[idx2]),
+                    'from': node_lookup.get(baseNode),
+                    'to':   node_lookup.get(newNode),
                     'color': 'rgb(0,0,255)'
                 });
+                baseNode = newNode;
             }
-        }
-    });
+        });
+    }
+
+    // ==============================================================
+    // Transitive relations
+    // ==============================================================
+    else
+    {
+        // Convert all sums relations into edges of agent 1
+        sums.forEach (function(arr, key) {
+            for (let idx1 = 0; idx1 < arr.length; ++idx1){
+                for (let idx2 = idx1 + 1; idx2 < arr.length; ++idx2){
+                    edges.push({
+                        'from': node_lookup.get(arr[idx1]),
+                        'to':   node_lookup.get(arr[idx2]),
+                        'color': 'rgb(255,0,0)'
+                    });
+                }
+            }
+        });
+        // Convert all products relations into edges of agent 2
+        products.forEach (function(arr, key) {
+            for (let idx1 = 0; idx1 < arr.length; ++idx1){
+                for (let idx2 = idx1 + 1; idx2 < arr.length; ++idx2){
+                    edges.push({
+                        'from': node_lookup.get(arr[idx1]),
+                        'to':   node_lookup.get(arr[idx2]),
+                        'color': 'rgb(0,0,255)'
+                    });
+                }
+            }
+        });
+    }
 
 
     return [nodes, edges, removedNodes];
@@ -202,7 +205,7 @@ function renderRemovedNodes(removedNodes, removedListId, startingAgent)
     for (let idx = 0, max = removedNodes.length; idx < max; ++idx)
     {
         text = ""
-        if (idx % 2 == startingAgent % 2)
+        if ((idx + startingAgent - 1) % 2 == 0)
         {
             text += "<div class='bobRemoved'>";
 

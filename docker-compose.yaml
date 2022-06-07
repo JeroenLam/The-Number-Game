@@ -1,7 +1,7 @@
 web:
   image: nginx
   volumes:
-   - ./docs:/usr/share/nginx/html
+   - ./docs:/usr/share/nginx/html/The-Number-Game/
   ports:
    - "80:80"
   environment:
