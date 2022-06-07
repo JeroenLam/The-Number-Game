@@ -61,13 +61,10 @@ function find_pairs(N, iterations)
     // Simulate 'iterations' times noting that you do not know the numbers
     for (let iter = 0; iter < iterations; ++iter)
     {
-        // Compute the set of sums and products
-        sums = generate_sums(candidate_pairs);
-        products = generate_products(candidate_pairs);
-
+        
         // Add a empty array to removedNodes array at index 'iter'
         removedNodes.push([]);
-
+        
         // Check who's turn it is
         if (do_not_know_product)
         {
@@ -101,6 +98,10 @@ function find_pairs(N, iterations)
             });
             do_not_know_product = true
         }
+        
+        // Compute the set of sums and products
+        sums = generate_sums(candidate_pairs);
+        products = generate_products(candidate_pairs);
     }
 
     // Construct a nodes and edges array from candidate pairs, sums and products
