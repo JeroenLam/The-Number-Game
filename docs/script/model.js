@@ -123,6 +123,9 @@ function find_pairs(N, iterations)
 
     edges = [];
 
+    console.log(sums);
+    console.log(products);
+
     // Convert all sums relations into edges of agent 1
     sums.forEach (function(arr, key) {
         baseNode = arr[0];
