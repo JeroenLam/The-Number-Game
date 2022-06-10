@@ -16,6 +16,9 @@
         <div id="navBar" class="topnav"></div>
         <div style='height:10px'></div>
         
+        <h1>
+            Introduction
+        </h1>
         For our project we will consider the following logic puzzle.
         <hr>
         Assume we have 2 agents, Alice and Bob, both are perfect logicians. Let us pick 2 random positive integers smaller than 100. We tell Alice the sum of these numbers and we tell Bob the product of these numbers. Both know this. Then the following conversations occurs between the agents:
@@ -42,12 +45,11 @@
         <hr>
 
         <p>
-            This problem looks quite intimidating at first, but the problem reduces relatively quickly when using a computer. We will start by noting that the pairs of numbers have no inherent ordering to them, hence the pairs (3,7) and (7,3) are equivalent. From here on we will denote each pair as (x,y) with x<=y. 
-            The puzzle is very similar to Rinekes birthday problem discussed during the course. 
-            We start by constructing all possible initial states and reduce the number of states after each announcement. 
-            In order to implement this we can apply different approaches. 
-            The naive approach would be to generate all possible pairs, let us assume the random numbers are smaller than 6. 
-            Then we use these to generate a set of all sums and products.
+            The puzzle is very similar to Rinekes birthday problem discussed during the course. However, there is a key differenct. In Rinekes birthday puzzle we assume the identity of one of the agents. However, in this puzzle we are a third agent who has no impact on the conversation and is only able to listen. Later on we will also consider this puzzle from the perspective of the agents.
+            The problem looks quite intimidating at first, but the problem reduces relatively quickly when using a computer. We will start by noting that the pairs of numbers have no inherent ordering to them, hence the pairs (3,7) and (7,3) are equivalent. From here on we will denote each pair as (x,y) with x<=y. 
+        </p>
+        <p>
+            For the sake of explanation, let us assume that the random numbers are chosen between [1,6) instead of [1,100). We will use this reduced example to show how we can reduce the set of possible number combinations for each anounchement. 
         </p>
 
         sums = { <br>
@@ -56,12 +58,10 @@
             4  : [(1,3), (2,2)], <br>
             5  : [(1,4), (2,3)], <br>
             6  : [(1,5), (2,4), (3,3)], <br>
-            7  : [(1,6), (2,5), (3,4)], <br>
-            8  : [(2,6), (3,5), (4,4)], <br>
-            9  : [(3,6), (4,5)], <br>
-            10 : [(4,6), (5,5)], <br>
-            11 : [(5,6)], <br>
-            12 : [(6,6)] <br>
+            7  : [(2,5), (3,4)], <br>
+            8  : [(3,5), (4,4)], <br>
+            9  : [(4,5)], <br>
+            10 : [(5,5)], <br>
         } <br>
         products = { <br>
             1  : [(1,1)], <br>
@@ -69,46 +69,71 @@
             3  : [(1,3)], <br>
             4  : [(1,4), (2,2)], <br>
             5  : [(1,5)], <br>
-            6  : [(1,6), (2,3)], <br>
+            6  : [(2,3)], <br>
             8  : [(2,4)], <br>
             9  : [(3,3)], <br>
             10 : [(2,5)], <br>
-            12 : [(2,6), (3,4)], <br>
-            15 : [(2,5)], <br>
+            12 : [(3,4)], <br>
+            15 : [(3,5)], <br>
             16 : [(4,4)], <br>
-            18 : [(3,6)], <br>
             20 : [(4,5)], <br>
-            24 : [(4,6)], <br>
             25 : [(5,5)], <br>
-            28 : [(5,6)], <br>
-            36 : [(6,6)] <br>
         } <br> <br>
 
         <p>
-        Then, when Bob announced that they do not know the numbers, then we know that it is not any product with only a single possible pair.
-        We can then reduce the set of possible pairs by removing all pairs which do not have any other pairs with the same product.
-        If Bob did know the numbers in the first step then Alice would know that the numbers correspond to a pair one of those pairs.
-        Similarly, when Alice announces that they do not know the number, we can remove all pairs for which there does not exist another pair with the same sum from the set of possible pairs.
+        Then, when Bob announced that they do not know the numbers, then we know that it is not any product with only a single possible pair. We can then reduce the set of possible pairs by removing all pairs which do not have any other pairs with the same product. This would result in the following sets:
         </p>
 
+        removed = { <br>
+            [(1,1), (1,2), (1,3), (1,5), (2,3), (2,4), (3,3), (2,5), (3,4), (3,5), (4,4), (4,5), (5,5)] <br>
+         }<br>
+        sums = { <br>
+            4  : [(2,2)], <br>
+            5  : [(1,4)], <br>
+        } <br>
+        products = { <br>
+            4  : [(1,4), (2,2)], <br>
+        } <br> <br>
+
         <p>
-        As an thought experiment, let's play the game out of Bob's perspective and assume that the number
-        games is played with x, y being in a range of [1,6)] and we receive a number N_B
-        which is 4. Alice receives a number N_A but this number is unknown for us.
-        We know that x * y = N_B and that 0 < x, y < 6. There are two possible
+        If Bob did know the numbers in the first step then Alice would know that the numbers correspond to a pair in the 'removed' set above. Similarly, when Alice announces that they do not know the number, we can remove all pairs for which there does not exist another pair with the same sum from the set of possible pairs. If we do this we get teh following sets:
+        </p>
+
+        removed = { <br>
+            [(1,1), (1,2), (1,3), (1,5), (2,3), (2,4), (3,3), (2,5), (3,4), (3,5), (4,4), (4,5), (5,5)], <br>
+            [(2,2), (1,4)] <br>
+         }<br>
+        sums = {} <br>
+        products = {} <br> <br>
+
+        <p>
+            This can be repeated to obtain all nodes removed durring each step. However, we would like to note that the problem is only solvable for for the 3rd agent in case only a single pair is removed by an announcement. If there are multiple pairs that are removed by the anounchement then the 3rd agent only knows that it is one of these pairs of numbers but not which one, as is the case in our example.
+        </p>
+        <p>     
+            As one might imagine this indicates that there are quite significant constraints on the original problem for a solution to exists for a given (fixed) number of 'Agent x does not know the numbers'. Hence we will also be looking an extention of the problem in which we consider ourselves to be one of the agents with knowledge about the received product or sum.
+        </p>
+
+        <h1>
+            From the perspective of an playing agent.
+        </h1>
+        <p>
+        Let's play the game out of Bob's perspective and assume that the number
+        games is played with x, y being in a range of [1,6)] and we receive a number N<sub>B</sub>
+        which is 4. Alice receives a number N<sub>A</sub> but this number is unknown for us.
+        We know that x * y = N<sub>B</sub> and that 0 < x, y < 6. There are two possible
         combinations of (x, y) possible which are (2, 2) and (1, 4).
         </p>
 
         <p>
-        If the numbers are (2, 2), then N_A = 4 and Alice would consider (2, 2) or
-        (3, 1) as possible. Similarly, if the numbers are (4, 1) then N_A = 5 and Alice
+        If the numbers are (2, 2), then N<sub>A</sub> = 4 and Alice would consider (2, 2) or
+        (3, 1) as possible. Similarly, if the numbers are (4, 1) then N<sub>A</sub> = 5 and Alice
         would consider (4, 1) and (3, 2) as possible. Either way, we know that Alice does
         not know the combination.
         </p>
 
         <p>
-        We considers it possible that (2, 2) with NA = 4 and Alice considering (2, 2)
-        and (3, 1). However, if (3, 1) then N_B = 3 which means that (x, y) must be
+        We considers it possible that (2, 2) with N<sub>A</sub> = 4 and Alice considering (2, 2)
+        and (3, 1). However, if (3, 1) then N<sub>B</sub> = 3 which means that (x, y) must be
         (3, 1) (The only possible numbers with a product of 3). Therefore Alice would
         consider it possible that we know (3, 1). We consider it possible that Alice
         considers it possible that we know the combination.
@@ -117,9 +142,9 @@
         <p>
         Now, we announce that we do not know (x, y).
         Do we still know that Alice does not know (x, y)? We consider it possible
-        that (2, 2) with N_A = 4. If NA = 4 then Alice would know that either (2, 2)
+        that (2, 2) with N<sub>A</sub> = 4. If N<sub>A</sub> = 4 then Alice would know that either (2, 2)
         or (3, 1). However, Alice knows that (3, 1) is not possible because we stated
-        that we do not know (If (3, 1) then N_B = 3 and we would know since the only
+        that we do not know (If (3, 1) then N<sub>B</sub> = 3 and we would know since the only
         possible product is (1, 3)). Therefore Alice would eliminate (3, 1) and conclude
         the only possible option which is (2, 2). Therefore should we should consider it
         possible that Alice knows (2, 2).
@@ -128,8 +153,8 @@
         <p>
         Do we know that Alice knows (x, y)? We consider (2, 2) and (4, 1) as possible.
         As already explained, if (2, 2), then Alice would know (2, 2), after we states that
-        we do not know. If on the other hand (4, 1), then N_A = 5 and Alice would
-        consider (4, 1) or (3, 2) as possible. However, if (3, 2) then N_B = 6 and the only
+        we do not know. If on the other hand (4, 1), then N<sub>A</sub> = 5 and Alice would
+        consider (4, 1) or (3, 2) as possible. However, if (3, 2) then N<sub>B</sub> = 6 and the only
         possible products are (3, 2). Alice can eliminate (3, 2) because we stated that
         we do not know. Therefore Alice would know (4, 1). So we know that Alice
         either knows (2, 2) or of (1, 4).
