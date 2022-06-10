@@ -1,6 +1,6 @@
-
 body {
-    background-color: #b1b1b1;
+    background: black url("/The-Number-Game/images/background.jpg") no-repeat top center fixed;
+    background-size: 100%;
 }
 
 .networkClass {
@@ -11,7 +11,7 @@ body {
 }
 
 .aliceRemoved {
-    background-color: #ff000040;
+    background-color: #ff7070;
     border: 1px solid;
     border-radius: 10px;
     padding: 4pt;
@@ -19,7 +19,7 @@ body {
 }
 
 .bobRemoved {
-    background-color: #0000ff40;;
+    background-color: #7070ff;;
     border: 1px solid;
     border-radius: 10px;
     padding: 4pt;
@@ -41,6 +41,24 @@ body {
     float: left;
     width: 48%;
 }
+
+.columnText {
+    float: left;
+    width: 70%;
+}
+
+.textBox {
+    background-color: #ffffff;
+    padding: 20pt;
+    border: 3px solid;
+    border-radius: 10px;
+    border-color: #00209f;
+}
+
+.columnPadding {
+    float: left;
+    width: 15%;
+}  
 
 .column4 {
     float: left;

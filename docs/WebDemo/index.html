@@ -19,47 +19,55 @@
         <div id="navBar" class="topnav"></div>
         <div style='height:10px'></div>
         
-
-        Input the random number range and enforce correct bounds
-        <div>
-            The numbers are picked from the range [<div id="Nmin_var" class=nobr>1</div>, <div id="Nmax_var" class=nobr>10</div>) <br>
-            Lower bound: 
-            <button type="button" onclick="changeDivVal('Nmin_var',  1, min(100, parseInt(document.getElementById('Nmax_var').textContent) - 1), -1);" class=nobr>-</button>
-            <button type="button" onclick="changeDivVal('Nmin_var',  1, min(100, parseInt(document.getElementById('Nmax_var').textContent) - 1),  1);" class=nobr>+</button>
-            <br>
-            Upper bound : 
-            <button type="button" onclick="changeDivVal('Nmax_var',  max(1, parseInt(document.getElementById('Nmin_var').textContent) + 1), 100, -1);" class=nobr>-</button>
-            <button type="button" onclick="changeDivVal('Nmax_var',  max(1, parseInt(document.getElementById('Nmin_var').textContent) + 1), 100,  1);" class=nobr>+</button>
-            <br>
-        </div>
-
+        <div class="row">
+            <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
+            <div class="columnText textBox">
+                Input the random number range and enforce correct bounds
+                <div>
+                    The numbers are picked from the range [<div id="Nmin_var" class=nobr>1</div>, <div id="Nmax_var" class=nobr>10</div>) <br>
+                    Lower bound: 
+                    <button type="button" onclick="changeDivVal('Nmin_var',  1, min(100, parseInt(document.getElementById('Nmax_var').textContent) - 1), -1);" class=nobr>-</button>
+                    <button type="button" onclick="changeDivVal('Nmin_var',  1, min(100, parseInt(document.getElementById('Nmax_var').textContent) - 1),  1);" class=nobr>+</button>
+                    <br>
+                    Upper bound : 
+                    <button type="button" onclick="changeDivVal('Nmax_var',  max(1, parseInt(document.getElementById('Nmin_var').textContent) + 1), 100, -1);" class=nobr>-</button>
+                    <button type="button" onclick="changeDivVal('Nmax_var',  max(1, parseInt(document.getElementById('Nmin_var').textContent) + 1), 100,  1);" class=nobr>+</button>
+                    <br>
+                </div>
         
-        <!-- Input for the number of iterations to run the model -->
-        <div> 
-            Number of iterations to run the model: 
-            <div id="iter_var" class=nobr>0</div>
-            <button type="button" onclick="changeDivVal('iter_var',  0, 30, -1);" class=nobr>-</button>
-            <button type="button" onclick="changeDivVal('iter_var',  0, 30,  1);" class=nobr>+</button>
-        </div>
-
-        <!-- Toggle for transitive relations -->
-        <div>
-            Render transitive relations: 
-            <input type="checkbox" id="transitiveToggle" class="nobr" checked>
-        </div>
-
-        <!-- Toggle for starting agent -->
-        <div>
-            Starting agent: <br>
-            <input type="radio" id="aliceStart" name="startAgent" value="1" class="nobr">
-            <label for="aliceStart">Alice (+)</label> <br>
-            <input type="radio" id="bobStart" name="startAgent" value="2" class="nobr" checked>
-            <label for="bobStart">Bob (*)</label> <br>
-        </div>
-
+                
+                <!-- Input for the number of iterations to run the model -->
+                <div> 
+                    Number of iterations to run the model: 
+                    <div id="iter_var" class=nobr>0</div>
+                    <button type="button" onclick="changeDivVal('iter_var',  0, 30, -1);" class=nobr>-</button>
+                    <button type="button" onclick="changeDivVal('iter_var',  0, 30,  1);" class=nobr>+</button>
+                </div>
         
-        <!-- Button to update model and removed posibilities list -->
-        <button type="button" onclick="setNetwork('Nmin_var', 'Nmax_var', 'iter_var', 'aliceStart', 'bobStart', 'transitiveToggle', 'mynetwork', 'removedList');">Update model</button>
+                <!-- Toggle for transitive relations -->
+                <div>
+                    Render transitive relations: 
+                    <input type="checkbox" id="transitiveToggle" class="nobr" checked>
+                </div>
+        
+                <!-- Toggle for starting agent -->
+                <div>
+                    Starting agent: <br>
+                    <input type="radio" id="aliceStart" name="startAgent" value="1" class="nobr">
+                    <label for="aliceStart">Alice (+)</label> <br>
+                    <input type="radio" id="bobStart" name="startAgent" value="2" class="nobr" checked>
+                    <label for="bobStart">Bob (*)</label> <br>
+                </div>
+        
+                
+                <!-- Button to update model and removed posibilities list -->
+                <button type="button" onclick="setNetwork('Nmin_var', 'Nmax_var', 'iter_var', 'aliceStart', 'bobStart', 'transitiveToggle', 'mynetwork', 'removedList');">Update model</button>
+            </div>
+            <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
+        </div>
+
+
+
 
         <!-- Block containing network and column to output removed values at each iteration -->
         <hr>
