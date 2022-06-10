@@ -38,6 +38,12 @@
                 We can now write, using the usual notation of S5 for two agents, K<sub>a</sub>K<sub>b</sub>p with the meaning 'Alice knows that Bob knows that p'.
                 </p>
                 <p>
+                We now have defined the types of relations we allow, as well as the way that our worlds are structured. What is left is to create a valuation at the possible worlds. The kind of statements that we wish to make.
+                Within the game we are considering, the only possible proposition at a world is 'this is the true world'. In all the worlds we consider possible, however, we do not know whether or not it is the real world.
+                Instead of using a single proposition for 'this is the true world', we instead associate each world with a proposition.
+                That is, at any world W<sub>i</sub>, we have a proposition p<sub>i</sub> that is true there and carries the meaning 'W<sub>i</sub> is the true world'. 
+                </p>
+                <p>
                 Now that we know the logic system and types of models we are considering, it is the next step to look at what happens when Alice or Bob exclaims 'I do not know the numbers'.
                 How does this update the possible worlds that we have to consider, and under what circumstance can Alice, who knows the sum (10) of the numbers or Bob, who knows their product (24) say 'I know the numbers'?
                 To do this, we think back to our world (4,6). Assume we have a sum connection to the world (3,7). Can Alice know the numbers?
@@ -48,6 +54,13 @@
                 To Alice, these are the worlds which have a unique sum, and for Bob those with a unique product.
                 These worlds are those which have a reflexive relation. We introduce the notation s⥈. as 'there exists a world t, with t not equal to s, such that sR.t'.
                 Where the '.' can either be + or * to denote their type of relations. Then at every step, we drop those worlds that do not have this property.
+                </p>
+                <p>
+                So far, we have looked at a very general class of objects; all S5 models with 2 agents, and with some further rules imposed on the relations of this model.
+                To complete our logic system, and corresponding models, we still have to consider the additional rules that the game imposes.
+                We have thus far not looked at the information Alice and Bob possess, and what logical rules this knowledge imposes on the system.
+                We propose to use further axioms to fill up the knowledge that Alice and Bob have about respectively the sum and the product of the numbers.
+                We give an example of how to do this below.
                 </p>
                 <p>
                 An example of a formal proof is shown below. It is assumed that the numbers are below 6 and that Alice received the number 5. The proof shows that if Bob states
