@@ -19,6 +19,7 @@
         <div class="row">
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
             <div class="columnText textBox">
+                <p>
                 To think about the logic underlying the number game, we first need to think about what kind of logical system makes sense to use for the number game.
                 Therefore, we first look at what kind of models we are considering.
                 The most intuitive way of thinking of possible worlds is that they are possible combinations of the given numbers, for example (4,6).
@@ -32,9 +33,11 @@
                 This implies that from the 'sum-possible' worlds when there is a 'sum'-connection between (4,6) and (5,5) and between (4,6) and (3,7), there has to be a connection between (5,5) and (3,7) because they all add up to 10.
                 Models that we are considering therefore also have to be transitive.
                 Since we are reasoning about knowledge and considering models that have to be reflexive, euclidean, and transitive, we make use of the corresponding modal logic system S5 for two agents.
-
+                </p>
+                <p>
                 We can now write, using the usual notation of S5 for two agents, K<sub>a</sub>K<sub>b</sub>p with the meaning 'Alice knows that Bob knows that p'.
-
+                </p>
+                <p>
                 Now that we know the logic system and types of models we are considering, it is the next step to look at what happens when Alice or Bob exclaims 'I do not know the numbers'.
                 How does this update the possible worlds that we have to consider, and under what circumstance can Alice, who knows the sum (10) of the numbers or Bob, who knows their product (24) say 'I know the numbers'?
                 To do this, we think back to our world (4,6). Assume we have a sum connection to the world (3,7). Can Alice know the numbers?
@@ -45,7 +48,15 @@
                 To Alice, these are the worlds which have a unique sum, and for Bob those with a unique product.
                 These worlds are those which have a reflexive relation. We introduce the notation s⥈. as 'there exists a world t, with t not equal to s, such that sR.t'.
                 Where the '.' can either be + or * to denote their type of relations. Then at every step, we drop those worlds that do not have this property.
-
+                </p>
+                <p>
+                An example of a formal proof is shown below. It is assumed that the numbers are below 6 and that Alice received the number 5. The proof shows that if Bob states
+                that he does not know, Alice knows that the numbers are 1 and 4. The rules N1-N4 express general knowledge about the game. N1 states that the number N_B that Bob receives
+                is the product of the two numbers and N2 expresses that the number N_A that Alice receives is the sum of both numbers. N3 expresses that Bob only considers the number combinations
+                possible that have a product of N_B and similarly N4 expresses that Alice only considers number combinations
+                possible that have a sum of N_A.
+                <img src="../images/easy_example_proof.PNG" alt="An example proof with < x,y <6">
+                </p>
             </div>
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
         </div>
