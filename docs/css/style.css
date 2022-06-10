@@ -6,8 +6,9 @@ body {
 .networkClass {
     background-color: #ffffff;
     height: 500pt;
-    border: 4px solid;
+    border: 3px solid;
     border-radius: 25px;
+    border-color: #00209f;
 }
 
 .aliceRemoved {
@@ -42,6 +43,21 @@ body {
     width: 48%;
 }
 
+.column66 {
+    float: left;
+    width: 70%;
+}
+
+.column30 {
+    float: left;
+    width: 30%;
+}
+
+.column4 {
+    float: left;
+    width: 4%;
+}
+
 .columnText {
     float: left;
     width: 70%;
@@ -60,10 +76,6 @@ body {
     width: 15%;
 }  
 
-.column4 {
-    float: left;
-    width: 4%;
-}
   
 /* Clear floats after the columns */
 .row:after {

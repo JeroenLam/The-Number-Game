@@ -2,8 +2,8 @@
 const navBarItems = [
     ["The Number Game", "/The-Number-Game/"],
     ["Epistemic logic", "/The-Number-Game/Epistemic"],
-    ["Generalisability", "/The-Number-Game/Generalisability"],
-    ["RNG bound", "/The-Number-Game/RNGbound"],
+    ["Empirical results", "/The-Number-Game/DemoResults"],
+    //["RNG bound", "/The-Number-Game/RNGbound"],
     ["Demo", "/The-Number-Game/WebDemo"],
     ["Github", "https://github.com/JeroenLam/The-Number-Game", "/The-Number-Game/images/GitHub-Mark-32px.png"],
 ];

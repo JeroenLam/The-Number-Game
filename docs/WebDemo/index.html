@@ -22,14 +22,15 @@
         <div class="row">
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
             <div class="columnText textBox">
-                Input the random number range and enforce correct bounds
                 <div>
                     The numbers are picked from the range [<div id="Nmin_var" class=nobr>1</div>, <div id="Nmax_var" class=nobr>10</div>) <br>
+                    <div class="nobr" title="Buttons used to change the lower bound of the range of the random numbers considered in the puzzle.">ℹ️</div>
                     Lower bound: 
                     <button type="button" onclick="changeDivVal('Nmin_var',  1, min(100, parseInt(document.getElementById('Nmax_var').textContent) - 1), -1);" class=nobr>-</button>
                     <button type="button" onclick="changeDivVal('Nmin_var',  1, min(100, parseInt(document.getElementById('Nmax_var').textContent) - 1),  1);" class=nobr>+</button>
                     <br>
-                    Upper bound : 
+                    <div class="nobr" title="Buttons used to change the upper bound of the range of the random numbers considered in the puzzle.">ℹ️</div>
+                    Upper bound: 
                     <button type="button" onclick="changeDivVal('Nmax_var',  max(1, parseInt(document.getElementById('Nmin_var').textContent) + 1), 100, -1);" class=nobr>-</button>
                     <button type="button" onclick="changeDivVal('Nmax_var',  max(1, parseInt(document.getElementById('Nmin_var').textContent) + 1), 100,  1);" class=nobr>+</button>
                     <br>
@@ -38,6 +39,7 @@
                 
                 <!-- Input for the number of iterations to run the model -->
                 <div> 
+                    <div class="nobr" title="Indicates the number of times the agents anounce that they 'do not know the numbers' in alternating sequence.">ℹ️</div>
                     Number of iterations to run the model: 
                     <div id="iter_var" class=nobr>0</div>
                     <button type="button" onclick="changeDivVal('iter_var',  0, 30, -1);" class=nobr>-</button>
@@ -46,12 +48,14 @@
         
                 <!-- Toggle for transitive relations -->
                 <div>
+                    <div class="nobr" title="Toggle the rendering of the transitive relations in the network. When tiggled off we only connect each equivalence class in series instead of all to all.">ℹ️</div>
                     Render transitive relations: 
                     <input type="checkbox" id="transitiveToggle" class="nobr" checked>
                 </div>
         
                 <!-- Toggle for starting agent -->
-                <div>
+                <div >
+                    <div class="nobr" title="Used to indicate which of the agents starts by anoucing that they do not know.">ℹ️</div>
                     Starting agent: <br>
                     <input type="radio" id="aliceStart" name="startAgent" value="1" class="nobr">
                     <label for="aliceStart">Alice (+)</label> <br>

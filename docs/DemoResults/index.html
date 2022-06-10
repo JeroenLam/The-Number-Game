@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LAMAS Project</title>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="https://unpkg.com/vis-data@latest/peer/umd/vis-data.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/vis-network@latest/peer/umd/vis-network.min.js"></script>
+        <script type="text/javascript" src="/The-Number-Game/script/genNavBar.js"></script>
+        <script type="text/javascript" src="/The-Number-Game/script/networks.js"></script>
+        <script type="text/javascript" src="/The-Number-Game/script/model.js"></script>
+        <script type="text/javascript" src="/The-Number-Game/script/support.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/vis-network/styles/vis-network.min.css" />
+        <link rel="stylesheet" href="/The-Number-Game/css/style.css">
+        <link rel="stylesheet" href="/The-Number-Game/css/stylebar.css">
+    </head>
+
+    <body onload="genNavBar('navBar'); 
+                  drawNetwork(1,10,0,2,1,'step0Network'); 
+                  drawNetwork(1,10,10,2,1,'step10Network');
+                  drawDemoExAlice('step10AliceNetwork');
+                  drawDemoExBob('step10BobNetwork');">
+        <!-- Load and generate the navigation bar -->
+        <div id="navBar" class="topnav"></div>
+        <div style='height:10px'></div>
+        
+        <div class="row">
+            <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
+            <div class="columnText textBox">
+                <h1>Demo explanation and preliminary analysis and results based on model</h1>
+                We recommend opening the demo in another tab to use while reading this page.
+
+                The demo provides an interactive and visual way of the puzzle. We will use the visualization to help with a better understanding of the model and properties that we observe.
+                
+                <hr>
+                <h2>Explaining the model</h2>
+                <!-- Initial description of the visualization and what is represented as what -->
+                We will start by looking at the Kripke model generated if we pick our random numbers from [1,10). In this model each state represents a possible combination of random numbers. We define states to be equivalent for Alice in case they sum to the same value. All states which are equivalent are fully connected by red relations R<sub>A</sub>. Similarly, all states that have the same product are considered equivalent for Bob and are fully connected by blue relations in R<sub>B</sub>. <br><br>
+
+
+                <div id="step0Network" class="networkClass" style="height: 400pt;"></div>
+                <center><i>Interactive window containing all states and relations for random numbers in the range [1,10).</i></center>
+                
+                <hr>
+                <h2>Explaining the iterations of the model</h2>
+                <!-- Explain how each step represents the same data as we would obtain from the initial approach -->
+                <p>
+                    As described in the original explanation of the story, if one of the agents announced that 'they do not know the numbers' then we can remove all the states in which that agent has no relation (apart from the implied reflexive relation). This can be done by incrementing the "Number of iterations to run the model" parameter of the demo. For the convenience of the reader we have also added a section in which all the removed nodes for each step will be printed. Using this we can increment the model step by step and look at the difference in structure of the graph. We will use this for our analysis of the solvability of the puzzle.
+                </p>
+
+                <!-- Note that the starting agent does not have a significant impact on the solvability of the puzzle -->
+
+
+                <hr>
+                <h2>Irreducible states at model convergence</h2>
+                <!-- Note that if we consider the steps taken for [1,10) that we find a non-reducible cycle-->
+                For our analysis we will start by considering the case in which we take a large number of steps for random numbers between [1,10). If we run the demo for 9+ iterations then we can see that after iteration 9 no more states are removed. We can also see that there are still states which we consider possible. Since no more states will be removed from this point we can conclude that if one of these states is the real state that we will not be able to find the solution to this problem as one of the agents. 
+                <br> <br>
+                
+                Let us consider this from the case of the agents. Let the real state be given by (1,8). Then Alice got the number 9 and knows at this point that the solution is either (3,6) or (1,8). From this she can also deduce that if it is (3,6) then Bob considers both (3,6) and (2,9) possible and if the numbers are (1,8) then Bob considers both (1,8) and (2,4) possible. Hence Alice does not know the numbers. By symmetry we can conclude that Bob also does not know the numbers.
+                <br><br>
+
+                <div class="row">
+                    <div class="column30">
+                        <div id="step10Network" class="networkClass" style="height: 300pt;"></div>
+                        <center><i>Model at step 9+.</i></center>
+                    </div>
+                    <div class="column4"> &nbsp; &nbsp; &nbsp; &nbsp;</div>
+                    <div class="column30">
+                        <div id="step10AliceNetwork" class="networkClass" style="height: 300pt;"></div>
+                        <center><i>Marked real state perspective of Alice.</i></center>
+                    </div>
+                    <div class="column4"> &nbsp; &nbsp; &nbsp; &nbsp;</div>
+                    <div class="column30">
+                        <div id="step10BobNetwork" class="networkClass" style="height: 300pt;"></div>
+                        <center><i>Marked real state perspective of Bob.</i></center>
+                    </div>
+                </div>
+                <br>
+
+                
+                <hr>
+
+                <!-- TODO: Remove this in final version -->
+                <b>notes part of first draft:</b>
+                We are currently looking for a more rigorous way to show that if a state has a path through the graph (without repetition of nodes) with alternating color (including in the start/end node) then the agents will not be able to terminate, i.e. no instance of 'I know the numbers' will occur.
+                <br>
+                A consequence of this is that in theory the agents could perform a breadth first search on the graph to construct their connected component and observe at each step if the equivalence class which they consider plausible has at least 1 possibly terminating solution. Note that in case the graph does not contain a cycle (excluding cycles from nodes in the same equivalence class) then the problem will always be solvable.
+                <br>
+                We have also seen empirically that in a lot of cases the graph does not fully reduce. In most cases (assuming the lower bound starts at 1) we see that only about 40% of the nodes are removed from the original graph.
+                <br>
+                Lastly we plan to look at the effects of the lower and upper bound of the random numbers used in the puzzle. From initial testing it looks like the length of the domain mainly impacts the addition agent while the multiplication agent mainly seems to be dependent on the starting position of the domain (i.e. [11,20) has a lot fewer multiplication relations (blue) compared to [1,10)). This could be nice for a demo during the presentations since we could force the lower bound to be higher by e.g. providing multiple 4 sided dice for a life demo.
+                <br><br>
+
+
+                <!-- Argue that the You know that I know That you know is the same as a depth first search on the graph -->
+
+
+                <!-- Note that we can determine before anything is said if the problem is solvable, not solvable or maybe solvable -->
+
+
+                <!-- Note some things about the random number range [1,10) vs [11,20) -->
+                        
+            </div>
+            <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
+        </div>
+        
+    </body>
+</html>
