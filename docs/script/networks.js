@@ -20,7 +20,7 @@ function onPageLoad(Nmin, Nmax, iter, networkId)
 }
 
 // Create network from html input
-function setNetwork(NminVarId, NmaxVarId, iterVarId, radioAId, radioBId, transId, networkId, removedListId)
+function setNetwork(NminVarId, NmaxVarId, iterVarId, radioAId, radioBId, transId, networkId, removedListId, renderModelId)
 {
     // Parse random number bound
     Nmin = parseInt(document.getElementById(NminVarId).textContent);
@@ -41,8 +41,12 @@ function setNetwork(NminVarId, NmaxVarId, iterVarId, radioAId, radioBId, transId
     // Run simulation
     ret = find_pairs(Nmin, Nmax, iter, startingAgent, transVal);
 
+    // Parse if we want to render the model
+    renderModel = document.getElementById(renderModelId).checked;
+
     // Create network and render results
-    createNetwork(networkId, ret[0], ret[1]);
+    if (renderModel)
+        createNetwork(networkId, ret[0], ret[1]);
     renderRemovedNodes(ret[2], removedListId, startingAgent);
 }
 

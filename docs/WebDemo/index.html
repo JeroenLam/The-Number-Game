@@ -53,6 +53,13 @@
                     <input type="checkbox" id="transitiveToggle" class="nobr" checked>
                 </div>
         
+                <!-- Toggle for rendering the model -->
+                <div>
+                    <div class="nobr" title="Toggle the rendering graphical representation of the model. Note that due to limits in the visualisation library the page might crash for large models. Hence this option can be toggled to remove the visual representation in order to still retreive the list of removed states.">ℹ️</div>
+                    Render graphical model: 
+                    <input type="checkbox" id="renderModelToggle" class="nobr" checked>
+                </div>
+
                 <!-- Toggle for starting agent -->
                 <div >
                     <div class="nobr" title="Used to indicate which of the agents starts by anoucing that they do not know.">ℹ️</div>
@@ -65,7 +72,7 @@
         
                 
                 <!-- Button to update model and removed posibilities list -->
-                <button type="button" onclick="setNetwork('Nmin_var', 'Nmax_var', 'iter_var', 'aliceStart', 'bobStart', 'transitiveToggle', 'mynetwork', 'removedList');">Update model</button>
+                <button type="button" onclick="setNetwork('Nmin_var', 'Nmax_var', 'iter_var', 'aliceStart', 'bobStart', 'transitiveToggle', 'mynetwork', 'removedList', 'renderModelToggle');">Update model</button>
             </div>
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
         </div>
