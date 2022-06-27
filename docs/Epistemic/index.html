@@ -35,16 +35,13 @@
                 Since we are reasoning about knowledge and considering models that have to be reflexive, euclidean, and transitive, we make use of the corresponding modal logic system S5 for two agents.
                 </p>
                 <p>
-                We can now write, using the usual notation of S5 for two agents, K<sub>a</sub>K<sub>b</sub>p with the meaning 'Alice knows that Bob knows that p'.
+                We can then write, using the usual notation of S5 for two agents, for example, K<sub>A</sub>K<sub>B</sub>p with the meaning 'Alice knows that Bob knows that p'.
                 </p>
                 <p>
                 We now have defined the types of relations we allow, as well as the way that our states are structured. What is left is to create a valuation at the possible states. The kind of statements that we wish to make.
                 Within the game we are considering, the only possible proposition at a state is 'this is the true state'. In all the states we consider possible, however, we do not know whether or not it is the real state.
                 Instead of using a proposition like 'this is the true state', at each state we will have a corresponding proposition that holds there.
-                That is, at any state <SPAN STYLE="text-decoration:overline">(x,y)</SPAN>, we have a proposition (x,y) that is true.
-                These propositions (x,y) seem to be all the propositions that we need in a state. But there is one problem; we need to be able to distinguish between states we belief to possibly be the true state, and all other statess.
-                Therefore, we put a 'marker' proposition at each of the states connected by the information of the number we got.
-                This proposition helps us keep track of the solvability from one perspective, and at each step we will consider the model constructed from one agent's perspective only.
+                That is, at any state <SPAN STYLE="text-decoration:overline">(x,y)</SPAN>, we have a proposition (x,y) that is true there.
                 </p>
                 <p>
                 From the transitivity, reflexivity and euclidean properties of our system, it follows that on this model we have the S5 logic with 2 agents, Alice and Bob.
@@ -53,13 +50,20 @@
                 </p>
                 As a summary; we will represent the Numbers Game by a model that corresponds to the public announcement logic.
                 Such a model we will call M = (S, R, &pi;, P).
-                The set of states S of this model will consist of states <SPAN STYLE="text-decoration:overline">(x,y)</SPAN>
-                The set of relations consists of the transitive, reflexive, and euclidean relations, such that
-                there is a sum-relation between <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> and <SPAN STYLE="text-decoration:overline">(u,v)</SPAN> if x+y = u+v,
-                and there is a product-relation between <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> and <SPAN STYLE="text-decoration:overline">(u,v)</SPAN> if x*y = u*v.
-                We consider the propositions P={(x,y)|<SPAN STYLE="text-decoration:overline">(x,y)</SPAN> &isin; S} &cup; {mark<sub>a</sub>} &cup; {mark<sub>b</sub>}.
-                The truth evaluation is given by &pi;<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>(x,y) = T, &pi;<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>(mark<sub>a</sub>) = T if x+y = N<sub>a</sub>,
-                and &pi;<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>(mark<sub>b</sub>) = T if x*y = N<sub>b</sub>.
+                The set of states S of this model will (initially) consist of states {<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>|U&le;x&le;y&lt;L, x,y &isin; N}, where L and U are the upper and lower bound respectively.
+                The set of relations consists of the transitive, reflexive, and euclidean relations, such that.
+                there is a sum-relation R<sub>A</sub> between <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> and <SPAN STYLE="text-decoration:overline">(u,v)</SPAN> if x+y = u+v,
+                and there is a product-relation R<sub>B</sub> between <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> and <SPAN STYLE="text-decoration:overline">(u,v)</SPAN> if x*y = u*v.
+                We consider the propositions P={(x,y)|<SPAN STYLE="text-decoration:overline">(x,y)</SPAN> &isin; S}.
+                The truth evaluation is given by &pi;<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>(x,y) = T.
+                <p>
+                On this model, we will use the Public Announcement logic PA. We can then phrase the announcements that Alice and Bob make in terms of a public announcement of the form: [&not;K<sub>i</sub>(x,y)], where i=A for Alice and i=B for Bob.
+                Since we are looking from an outside perspective at the problem, we can then study if it is possible to see if we can find the true world based on the public announcements that were made.
+                Such a statement will be of form [&not;K<sub>A</sub>(x,y)][&not;K<sub>B</sub>(x,y)]...[K<sub>i</sub>(x,y)]K<sub>i+1</sub>(x,y). Where i can be A(lice) or B(ob), and i+1 B(ob) or A(lice).
+                As an example, let's say Alice says she does not know, Bob says he does not know, and then Alice knows. Then we get the statement form:
+                [&not;K<sub>A</sub>(x,y)][&not;K<sub>B</sub>(x,y)][K<sub>A</sub>(x,y)]K<sub>B</sub>(x,y).
+                Where we have to check if for some specific proposition <b>(x,y)</b> in the model, this statement holds at all states.
+                </p>
                 <p>
                 An example of a formal proof is shown below. It is assumed that the numbers are below 6 and that Alice received the number 5. The proof shows that if Bob states
                 that he does not know, Alice knows that the numbers are 1 and 4. The rules N1-N4 express general knowledge about the game. N1 states that the number N_B that Bob receives
