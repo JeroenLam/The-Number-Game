@@ -23,6 +23,9 @@
         <div class="row">
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
             <div class="columnText textBox">
+
+            
+
                 <h1>
                     Model construction and logic system
                 </h1>
@@ -47,6 +50,25 @@
 
                 <div id="step0Network" class="networkClass" style="height: 400pt;"></div>
                 <center><i>Interactive window containing an example model with all states and relations for random numbers in the range [1,6).</i></center>
+
+                <h2>
+                    Epistemic Logic Without Announcements
+                </h2>
+                <p>
+                In order to use formal proofs for the number game we need additional rules to express game specific knowledge. We call these rules N1-N4. 
+                N1 states that the number N_B that Bob receives is the product of the two numbers and N2 expresses that the number N_A that Alice receives 
+                is the sum of both numbers. In addition to this, N3 expresses that Bob only considers the number combinations
+                possible that have a product of N_B and similarly, N4 expresses that Alice only considers number combinations
+                possible that have a sum of N_A.
+
+                An example of a formal proof is shown below. It is assumed that the numbers are below 6 and that Alice received the number 5. The proof shows that if Bob states
+                that he does not know, Alice knows that the numbers are 1 and 4.
+                <img src="../images/easy_example_proof.PNG" alt="An example proof with < x,y <6">
+
+                Even though this example shows successfully how knowledge can be derived using these rules, there are major limitations to this method. The problem is that 
+                we can not consider a knowledge that evolves over time. For example Alice may states that she does not know the numbers in the beginning, but later she states
+                that she does know them. This type of non-monotonic can not be represented. This motivates us to use change our model using announcements. 
+                </p>
 
                 <h2>
                     Truth valuations
@@ -81,15 +103,6 @@
                 As an example, let's say Alice says she does not know, Bob says he does not know, and then Alice knows. Then we get the statement form:
                 [&not;K<sub>A</sub>(x,y)][&not;K<sub>B</sub>(x,y)][K<sub>A</sub>(x,y)]K<sub>B</sub>(x,y).
                 Where we have to check if for some specific proposition <b>(x,y)</b> in the model, this statement holds at all states.
-                </p>
-                <hr>
-                <p>
-                An example of a formal proof is shown below. It is assumed that the numbers are below 6 and that Alice received the number 5. The proof shows that if Bob states
-                that he does not know, Alice knows that the numbers are 1 and 4. The rules N1-N4 express general knowledge about the game. N1 states that the number N_B that Bob receives
-                is the product of the two numbers and N2 expresses that the number N_A that Alice receives is the sum of both numbers. N3 expresses that Bob only considers the number combinations
-                possible that have a product of N_B and similarly, N4 expresses that Alice only considers number combinations
-                possible that have a sum of N_A.
-                <img src="../images/easy_example_proof.PNG" alt="An example proof with < x,y <6">
                 </p>
             </div>
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
