@@ -30,15 +30,15 @@
                     The approach of the algorithm
                 </h2>
                 <p>
-                    Using the preveously defined sentences we can evaluta after how many itterarions of anounching "I do not know the numbers" a number is removed from the model. As noted before, we can remove a state from the model when it is a singleton from the view of the current agent. Thus, if we have a sequence of anouncements and we can show that the atom $(x,y)$ holds as well as $K_i(x,y)$ holds where $i$ is the current agents (i.e. the state exists and it is a singleton from the perspecive of agent $i$). Then we know that they should know that they know at that iteration if that state corresponds to the sum/product received by the agent at the start.
+                    Using the preveously defined sentences we can evaluta after how many itterarions of anounching "I do not know the numbers" a number is removed from the model. As noted before, we can remove a state from the model when it is a singleton from the view of the current agent. Thus, if we have a sequence of anouncements and we can show that the atom (x,y) holds as well as K<sub>i</sub>(x,y) holds where i is the current agents (i.e. the state exists and it is a singleton from the perspecive of agent i). Then we know that they should know that they know at that iteration if that state corresponds to the sum/product received by the agent at the start.
                 </p>
 
                 <p>
-                    Using this itterative method we can start by evaluate <bf>ADD FORMULA FOR SINGLETON IN STEP 1</bf> for each pair $(x,y)$ to see if they can be deduced by agent $i$ in the first step. Then we evaluate <bf>ADD FORMULA FOR SINGLETON IN STEP 2</bf> to see which states can be deduced by agent $j$ after the initial anouncement. This process can be repeated by adding anouncements of the agents in an alternating fashin. The algorithm terminates when no states where removed after 2 consecutive iterations. 
+                    Using this itterative method we can start by evaluate <bf>ADD FORMULA FOR SINGLETON IN STEP 1</bf> for each pair (x,y) to see if they can be deduced by agent i in the first step. Then we evaluate <bf>ADD FORMULA FOR SINGLETON IN STEP 2</bf> to see which states can be deduced by agent j after the initial anouncement. This process can be repeated by adding anouncements of the agents in an alternating fashin. The algorithm terminates when no states where removed after 2 consecutive iterations. 
                 </p>
 
                 <p>
-                    We will now argue why this is a valid stopping criterion for the algorithm. Assume that agent $i$ anounced that they do not know and that not states where removed from the model by this announcement. Then, if agent $j$ anounces that they do not know and this also does not remove any additional states, then agent $i$ considers the model from exactly the same perspective as they did 2 anounchements ago. Hence there will never be any additional states which will be removed from that point onward. Note that this condision does not give any guarantees that the model will be empty after the algorithm, i.e. there is no guarantees that all generated number pairs can be deduced using a sequence of "I do not know" annouchements.
+                    We will now argue why this is a valid stopping criterion for the algorithm. Assume that agent i anounced that they do not know and that not states where removed from the model by this announcement. Then, if agent j anounces that they do not know and this also does not remove any additional states, then agent i considers the model from exactly the same perspective as they did 2 anounchements ago. Hence there will never be any additional states which will be removed from that point onward. Note that this condision does not give any guarantees that the model will be empty after the algorithm, i.e. there is no guarantees that all generated number pairs can be deduced using a sequence of "I do not know" annouchements.
                 </p>
 
 
@@ -53,7 +53,7 @@
                     Initialization
                 </h2>
                 <p>
-                    We will start by creating a set of <i>candidate_pairs</i> containing all possible random numbers that can be considered. Note that in the original puzzle they use a inclusive lower bound of 1 and an exclusive upper bound of 100. Also note that there is no difference between $(x,y)$ and $(y,x)$ and only one of them needs to be added to the <i>candidate_pairs</i>.
+                    We will start by creating a set of <i>candidate_pairs</i> containing all possible random numbers that can be considered. Note that in the original puzzle they use a inclusive lower bound of 1 and an exclusive upper bound of 100. Also note that there is no difference between (x,y) and (y,x) and only one of them needs to be added to the <i>candidate_pairs</i>.
                 </p>
 
                 <p>

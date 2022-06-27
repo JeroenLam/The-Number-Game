@@ -6,12 +6,16 @@
         <script type="text/javascript" src="https://unpkg.com/vis-data@latest/peer/umd/vis-data.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/vis-network@latest/peer/umd/vis-network.min.js"></script>
         <script type="text/javascript" src="/The-Number-Game/script/genNavBar.js"></script>
+        <script type="text/javascript" src="/The-Number-Game/script/networks.js"></script>
+        <script type="text/javascript" src="/The-Number-Game/script/model.js"></script>
+        <script type="text/javascript" src="/The-Number-Game/script/support.js"></script>
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/vis-network/styles/vis-network.min.css" />
         <link rel="stylesheet" href="/The-Number-Game/css/style.css">
         <link rel="stylesheet" href="/The-Number-Game/css/stylebar.css">
     </head>
 
-    <body onload="genNavBar('navBar');">
+    <body onload="genNavBar('navBar');
+                  drawNetwork(1,6,0,2,1,'step0Network'); ">
         <!-- Load and generate the navigation bar -->
         <div id="navBar" class="topnav"></div>
         <div style='height:10px'></div>
@@ -19,6 +23,9 @@
         <div class="row">
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
             <div class="columnText textBox">
+                <h1>
+                    Model construction and logic system
+                </h1>
                 <p>
                 To think about the logic underlying the number game, we first want to find a logical system supporting the number game.
                 Therefore, we first look at what kind of models we are considering.
@@ -37,12 +44,23 @@
                 <p>
                 We can then write, using the usual notation of S5 for two agents, for example, K<sub>A</sub>K<sub>B</sub>p with the meaning 'Alice knows that Bob knows that p'.
                 </p>
+
+                <div id="step0Network" class="networkClass" style="height: 400pt;"></div>
+                <center><i>Interactive window containing an example model with all states and relations for random numbers in the range [1,6).</i></center>
+
+                <h2>
+                    Truth valuations
+                </h2>
                 <p>
                 We now have defined the types of relations we allow, as well as the way that our states are structured. What is left is to create a valuation at the possible states. The kind of statements that we wish to make.
                 Within the game we are considering, the only possible proposition at a state is 'this is the true state'. In all the states we consider possible, however, we do not know whether or not it is the real state.
                 Instead of using a proposition like 'this is the true state', at each state we will have a corresponding proposition that holds there.
                 That is, at any state <SPAN STYLE="text-decoration:overline">(x,y)</SPAN>, we have a proposition (x,y) that is true there.
                 </p>
+
+                <h2>
+                    Public announcement logic
+                </h2>
                 <p>
                 From the transitivity, reflexivity and euclidean properties of our system, it follows that on this model we have the S5 logic with 2 agents, Alice and Bob.
                 However, we also are using the public announcements of `I do not know the numbers' as a way of making logical statements.
@@ -50,7 +68,7 @@
                 </p>
                 As a summary; we will represent the Numbers Game by a model that corresponds to the public announcement logic.
                 Such a model we will call M = (S, R, &pi;, P).
-                The set of states S of this model will (initially) consist of states {<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>|U&le;x&le;y&lt;L, x,y &isin; N}, where L and U are the upper and lower bound respectively.
+                The set of states S of this model will (initially) consist of states {<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>|U&le;x&le;y&lt;L, x,y &isin; N}, where L and U are the integer upper and lower bound respectively.
                 The set of relations consists of the transitive, reflexive, and euclidean relations, such that.
                 there is a sum-relation R<sub>A</sub> between <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> and <SPAN STYLE="text-decoration:overline">(u,v)</SPAN> if x+y = u+v,
                 and there is a product-relation R<sub>B</sub> between <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> and <SPAN STYLE="text-decoration:overline">(u,v)</SPAN> if x*y = u*v.
@@ -64,6 +82,7 @@
                 [&not;K<sub>A</sub>(x,y)][&not;K<sub>B</sub>(x,y)][K<sub>A</sub>(x,y)]K<sub>B</sub>(x,y).
                 Where we have to check if for some specific proposition <b>(x,y)</b> in the model, this statement holds at all states.
                 </p>
+                <hr>
                 <p>
                 An example of a formal proof is shown below. It is assumed that the numbers are below 6 and that Alice received the number 5. The proof shows that if Bob states
                 that he does not know, Alice knows that the numbers are 1 and 4. The rules N1-N4 express general knowledge about the game. N1 states that the number N_B that Bob receives
