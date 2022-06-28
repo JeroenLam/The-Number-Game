@@ -94,5 +94,35 @@
             </div>
         </div>
         <hr>
+
+        <div class="row">
+            <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
+            <div class="columnText textBox">
+                <h1>
+                    Demo explanation
+                </h1>
+                <p>
+                    The demo provides an interactive and visual way of the puzzle. We will use the visualization to help with a better understanding of the model and properties that we observe.
+                </p>
+        
+                <h2>
+                    Explaining the model
+                </h2>
+                <p>
+                    By default a Kripke model will be shown for the random numbers [1,10). In this model each state represents a possible combination of random numbers. We define states to be equivalent for Alice in case they sum to the same value. All states which are equivalent are fully connected by red relations R<sub>A</sub>. Similarly, all states that have the same product are considered equivalent for Bob and are fully connected by blue relations in R<sub>B</sub>.
+                </p>
+
+                <h2>
+                    Iterating the model
+                </h2>
+                <p>
+                    As described in the original explanation of the story, if one of the agents announced that 'they do not know the numbers' then we can remove all the states in which that agent has no relation (apart from the implied reflexive relation). This can be done by incrementing the "Number of iterations to run the model" parameter of the demo. For the convenience of the reader we have also added a section in which all the removed nodes for each step will be printed. Using this we can increment the model step by step and look at the difference in structure of the graph.
+                </p>
+            </div>
+            <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
+        </div>
+
+
+
     </body>
 </html>
