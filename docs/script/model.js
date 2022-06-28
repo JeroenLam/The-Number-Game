@@ -1,4 +1,24 @@
-// Javascript version of example.py
+// Funtion to pick corresponding generator
+function generate_map(candidate_pairs, operation)
+{
+    switch(operation) {
+        case 1:
+            map = generate_sums(candidate_pairs);
+            break;
+        case 2:
+            map = generate_products(candidate_pairs);
+            break;
+        case 3:
+            map = generate_sqr_add(candidate_pairs);
+            break;
+        case 4:
+            map = generate_abs_sub(candidate_pairs);
+            break;
+        default:
+            map = new Map();
+    }
+    return map;
+}
 
 // Generate all sum options from input array
 function generate_sums(candidate_pairs)
@@ -40,7 +60,47 @@ function generate_products(candidate_pairs)
     return products;
 }
 
-function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
+// Generate all additions of squares from input array
+function generate_sqr_add(candidate_pairs)
+{
+    // Define map to store results
+    products = new Map();
+    // Loop over all pairs
+    for (pair of candidate_pairs.values())
+    {
+        product = (pair[0]*pair[0]) + (pair[1]*pair[1]);
+        // If product is not in map, add an empty array
+        if (!products.has(product))
+            products.set(product, []);
+        // Add the pair to the array
+        temp = products.get(product);
+        temp.push(pair);
+        products.set(product, temp);
+    }
+    return products;
+}
+
+// Generate all absolute values of subtractions from input array
+function generate_abs_sub(candidate_pairs)
+{
+    // Define map to store results
+    products = new Map();
+    // Loop over all pairs
+    for (pair of candidate_pairs.values())
+    {
+        product = Math.abs(pair[0] - pair[1]);
+        // If product is not in map, add an empty array
+        if (!products.has(product))
+            products.set(product, []);
+        // Add the pair to the array
+        temp = products.get(product);
+        temp.push(pair);
+        products.set(product, temp);
+    }
+    return products;
+}
+
+function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle, opA, opB)
 {
     // Generate all possible pairs
     candidate_pairs = new Set();
@@ -50,13 +110,13 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
     
     // Swap between hearing from the agents every round (product or sum)
     if (startingAgent == 1) // Alice
-        do_not_know_product = false;
+        turn_bob = false;
     if (startingAgent == 2) // Bob
-        do_not_know_product = true;
+        turn_bob = true;
 
     // Compute the initial set of sums and products
-    sums = generate_sums(candidate_pairs);
-    products = generate_products(candidate_pairs);
+    set_A = generate_map(candidate_pairs, opA);
+    set_B = generate_map(candidate_pairs, opB);
 
     // Allocate a array to keep track of the removed nodes
     removedNodes = [];
@@ -69,12 +129,12 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
         removedNodes.push([]);
         
         // Check who's turn it is
-        if (do_not_know_product)
+        if (turn_bob)
         {
-            // Go through products. For any product that only has a single pair,
+            // Go through set_B. For any product that only has a single pair,
             // we can remove those from the candidates for the next round.
             // Agent 2 (Bob) : Blue
-            products.forEach(function(value, key) {
+            set_B.forEach(function(value, key) {
                 // Check how many pairs satisfy the product
                 if (value.length == 1)
                 {
@@ -83,14 +143,14 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
                     candidate_pairs.delete(value[0]);
                 }
             });
-            do_not_know_product = false
+            turn_bob = false
         }
         else
         {
-            // Go through sums. For any product that only has a single pair,
+            // Go through set_A. For any product that only has a single pair,
             // we can remove those from the candidates for the next round.
             // Agent 1 (Alice) : red
-            sums.forEach(function(value, key) {
+            set_A.forEach(function(value, key) {
                 // Check how many pairs satisfy the product
                 if (value.length == 1)
                 {
@@ -99,15 +159,15 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
                     candidate_pairs.delete(value[0]);
                 }
             });
-            do_not_know_product = true
+            turn_bob = true
         }
 
-        // Compute the set of sums and products
-        sums = generate_sums(candidate_pairs);
-        products = generate_products(candidate_pairs);
+        // Compute the set of set_A and set_B
+        set_A = generate_map(candidate_pairs, opA);
+        set_B = generate_map(candidate_pairs, opB);
     }
 
-    // Construct a nodes and edges array from candidate pairs, sums and products
+    // Construct a nodes and edges array from candidate pairs, set_A and set_B
     node_id = 1;
     nodes = [];
     node_lookup = new Map();
@@ -133,8 +193,8 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
     // ==============================================================
     if (transTogle == 0)
     {
-        // Convert all sums relations into edges of agent 1
-        sums.forEach (function(arr, key) {
+        // Convert all set_A relations into edges of agent 1
+        set_A.forEach (function(arr, key) {
             baseNode = arr[0];
             for (let idx = 1, max = arr.length; idx < max; ++idx)
             {
@@ -147,8 +207,8 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
                 baseNode = newNode;
             }
         });
-        // Convert all products relations into edges of agent 2
-        products.forEach (function(arr, key) {
+        // Convert all set_B relations into edges of agent 2
+        set_B.forEach (function(arr, key) {
             baseNode = arr[0];
             for (let idx = 1, max = arr.length; idx < max; ++idx)
             {
@@ -168,8 +228,8 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
     // ==============================================================
     else
     {
-        // Convert all sums relations into edges of agent 1
-        sums.forEach (function(arr, key) {
+        // Convert all set_A relations into edges of agent 1
+        set_A.forEach (function(arr, key) {
             for (let idx1 = 0; idx1 < arr.length; ++idx1){
                 for (let idx2 = idx1 + 1; idx2 < arr.length; ++idx2){
                     edges.push({
@@ -180,8 +240,8 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle)
                 }
             }
         });
-        // Convert all products relations into edges of agent 2
-        products.forEach (function(arr, key) {
+        // Convert all set_B relations into edges of agent 2
+        set_B.forEach (function(arr, key) {
             for (let idx1 = 0; idx1 < arr.length; ++idx1){
                 for (let idx2 = idx1 + 1; idx2 < arr.length; ++idx2){
                     edges.push({
