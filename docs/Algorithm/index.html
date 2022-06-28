@@ -20,21 +20,21 @@
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
             <div class="columnText textBox">
                 <h1>
-                    solvability using logical sentences
+                    Solvability using logical sentences
                 </h1>
                 <p>
-                    In this section we will have a closer look at how we can use the previously defined logical sentences in order to create an algorithm to derive the solvability of each different solutions.
+                    In this section we will have a closer look at how we can use the previously defined logical sentences in order to create an algorithm to derive the solvability of each different solution.
                 </p>
 
                 <h2>
                     The approach of the algorithm
                 </h2>
                 <p>
-                    Using the preveously defined sentences we can evaluta after how many itterarions of anounching "I do not know the numbers" a number is removed from the model. As noted before, we can remove a state from the model when it is a singleton from the view of the current agent. Thus, if we have a sequence of anouncements that reduce the model and we can show that K<sub>i</sub>(u,v) holds where i is the current agents (i.e. the state exists and it is a singleton from the perspecive of agent i). Then we know that the agent knows that the state is removed at this iteration.
+                    Using the previously defined sentences we can evaluate after how many iterations of announcing "I do not know the numbers" a number is removed from the model. As noted before, we can remove a state from the model when it is a singleton from the view of the current agent. Thus, if we have a sequence of announcements that reduce the model and we can show that K<sub>i</sub>(u,v) holds where i is the current agent (i.e. the state exists and it is a singleton from the perspective of agent i). Then we know that the agent knows that the state is removed at this iteration.
                 </p>
 
                 <p>
-                    From this reasoning we can create the following itterative method. We start by assuming agent i anounces first followed by agent j. Then we know that a state (u,v) can be deduced without any announcement if K<sub>i</sub>(u,v) is true (i.e. the state is a singleton). Then we can remove all of the singleton states by announcing that we do not know the number, i.e. [¬<b>K</b><sub>i</sub>(x,y)]. We can then evaluate [¬<b>K</b><sub>i</sub>(x,y)]K<sub>j</sub>(u,v) at each state (u,v) in the model. This statement is true if and only if (u,v) is a singleton or (u,v) was removed durring a previous iteration. By keeping track of the new states for which the statement is true we can find which states are removed durring which itteration.
+                    From this reasoning we can create the following iterative method. We start by assuming agent i announces first followed by agent j. Then we know that a state (u,v) can be deduced without any announcement if K<sub>i</sub>(u,v) is true (i.e. the state is a singleton). Then we can remove all of the singleton states by announcing that we do not know the number, i.e. [¬<b>K</b><sub>i</sub>(x,y)]. We can then evaluate [¬<b>K</b><sub>i</sub>(x,y)]K<sub>j</sub>(u,v) at each state (u,v) in the model. This statement is true if and only if (u,v) is a singleton or (u,v) was removed during a previous iteration. By keeping track of the new states for which the statement is true we can find which states are removed during which iteration.
                 </p>
 
                 <p>
@@ -42,7 +42,7 @@
                 </p>
 
                 <p>
-                    We will now argue why this is a valid stopping criterion for the algorithm. Assume that agent i anounced that they do not know (in other words, no states where removed from the model by this announcement). Then, if agent j anounces that they do not know, then agent i considers the model from exactly the same perspective as they did 2 anounchements ago. Hence there will never be any additional states which will be removed from that point onward. Note that this condision does not give any guarantees that the model will be empty after the algorithm, i.e. there is no guarantees that all generated number pairs can be deduced using a sequence of "I do not know" annouchements.
+                    We will now argue why this is a valid stopping criterion for the algorithm. Assume that agent i announced that they do not know (in other words, no states were removed from the model by this announcement). Then, if agent j announces that they do not know, then agent i considers the model from exactly the same perspective as they did 2 announcements ago. Hence there will never be any additional states which will be removed from that point onward. Note that this condition does not give any guarantees that the model will be empty after the algorithm, i.e. there is no guarantee that all generated number pairs can be deduced using a sequence of "I do not know" announcements.
                 </p>
 
 
@@ -57,7 +57,7 @@
                     Initialization
                 </h2>
                 <p>
-                    We will start by creating a set of <i>candidate_pairs</i> containing all possible random numbers that can be considered. Note that in the original puzzle they use a inclusive lower bound of 1 and an exclusive upper bound of 100. Also note that due to addition and multiplication being abelian opperations there is no difference between (x,y) and (y,x) and only one of them needs to be added to the <i>candidate_pairs</i>. In case one where to extend the the problem to different opperations, then this assumption may not need to be satisfied in which case we need to add all pairs (x,y)
+                    We will start by creating a set of <i>candidate_pairs</i> containing all possible random numbers that can be considered. Note that in the original puzzle they use an inclusive lower bound of 1 and an exclusive upper bound of 100. Also note that due to addition and multiplication being abelian operations there is no difference between (x,y) and (y,x) and only one of them needs to be added to the <i>candidate_pairs</i>. In case one where to extend the the problem to different operations, then this assumption may not need to be satisfied in which case we need to add all pairs (x,y).
                 </p>
 
                 <p>
@@ -66,10 +66,10 @@
 
                 <h2> Main loop</h2>
                 <p>
-                    We will loop until no states where removed for 2 consecutive iterations. We loop over the map of <i>product</i>/<i>sum</i> (depending on the starting agent) and remove all pairs which are the only pair corresponding to a <i>product</i>/<i>sum</i> value. In other words, we remove all states which do not have a relation to another state.
+                    We will loop until no states are removed for 2 consecutive iterations. We loop over the map of <i>product</i>/<i>sum</i> (depending on the starting agent) and remove all pairs which are the only pair corresponding to a <i>product</i>/<i>sum</i> value. In other words, we remove all states which do not have a relation to another state.
                 </p>
                 <p>
-                    Then we recompute the <i>product</i> and <i>sum</i> value between each step. It is recommended to also keep track of which nodes where removed durring which step of the iteration on order to obtain the list of solvable initial conditions and after how many steps they are solved.
+                    Then we recompute the <i>product</i> and <i>sum</i> value between each step. It is recommended to also keep track of which nodes were removed during which step of the iteration in order to obtain the list of solvable initial conditions and after how many steps they are solved.
                 </p>
 
             </div>
