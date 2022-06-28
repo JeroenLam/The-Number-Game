@@ -14,6 +14,12 @@ function generate_map(candidate_pairs, operation)
         case 4:
             map = generate_abs_sub(candidate_pairs);
             break;
+        case 5: 
+            map = generated_mod_add(candidate_pairs);
+            break;
+        case 6: 
+            map = generated_mod_mult(candidate_pairs);
+            break;  
         default:
             map = new Map();
     }
@@ -89,6 +95,46 @@ function generate_abs_sub(candidate_pairs)
     for (pair of candidate_pairs.values())
     {
         product = Math.abs(pair[0] - pair[1]);
+        // If product is not in map, add an empty array
+        if (!products.has(product))
+            products.set(product, []);
+        // Add the pair to the array
+        temp = products.get(product);
+        temp.push(pair);
+        products.set(product, temp);
+    }
+    return products;
+}
+
+// Generate all sums mod 6 from input array
+function generated_mod_add(candidate_pairs)
+{
+    // Define map to store results
+    products = new Map();
+    // Loop over all pairs
+    for (pair of candidate_pairs.values())
+    {
+        product = (pair[0] + pair[1]) % 6;
+        // If product is not in map, add an empty array
+        if (!products.has(product))
+            products.set(product, []);
+        // Add the pair to the array
+        temp = products.get(product);
+        temp.push(pair);
+        products.set(product, temp);
+    }
+    return products;
+}
+
+// Generate products mod 6 from input array
+function generated_mod_mult(candidate_pairs)
+{
+    // Define map to store results
+    products = new Map();
+    // Loop over all pairs
+    for (pair of candidate_pairs.values())
+    {
+        product = (pair[0] * pair[1]) % 6;
         // If product is not in map, add an empty array
         if (!products.has(product))
             products.set(product, []);
