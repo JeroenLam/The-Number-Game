@@ -42,7 +42,7 @@
                 </p>
 
                 <p>
-                    We will now argue why this is a valid stopping criterion for the algorithm. Assume that agent i announced that they do not know and no states were removed from the model by this announcement. Then, if agent j announces that they do not know and no states were removed from the model, then agent i considers the model from exactly the same perspective as they did 2 announcements ago. Hence there will never be any additional states which will be removed from that point onward. Note that this condition does not give any guarantees that the model will be empty after the algorithm, i.e. there is no guarantee that all generated number pairs can be deduced using a sequence of "I do not know" announcements.
+                    We will now argue why this is a valid stopping criterion for the algorithm. Assume that agent i announced that they do not know and no states were removed from the model by this announcement. Then, if agent j announces that they do not know and no states were removed from the model, then agent i considers the model from exactly the same perspective as they did 2 announcements ago. Since we are in the same state, the same action will lead to the same result. Hence there will never be any additional states which will be removed from that point onward. Note that this condition does not give any guarantees that the model will be empty after the algorithm, i.e. there is no guarantee that all generated number pairs can be deduced using a sequence of "I do not know" announcements.
                 </p>
 
 
@@ -61,7 +61,7 @@
                 </p>
 
                 <p>
-                    Next we will create 2 function <i>generate_sums(candidate_pairs)</i> and <i>generate_products(candidate_pairs)</i> which compute a map containing the sum or product as the key and an array of pairs which sum or multiply to the key as the value. Note that these sets correspond to the relations for Alice and Bob in our formal model.
+                    Next we will create 2 functions: <i>generate_sums(candidate_pairs)</i> and <i>generate_products(candidate_pairs)</i>, which compute a map containing the sum or product as the key and an array of pairs which sum or multiply to the key as the value. Note that these sets correspond to the relations for Alice and Bob in our formal model.
                 </p>
 
                 <h2> Main loop</h2>
