@@ -29,10 +29,22 @@
                 <h1>
                     Model construction and logic system
                 </h1>
+
+                <h2>
+                    States
+                </h2>
                 <p>
                 To think about the logic underlying the number game, we first want to find a logical system supporting the number game.
                 Therefore, we first look at what kind of models we are considering.
-                The most intuitive way of thinking of possible states is that they are possible combinations of the given numbers, for example (4,6).
+                The most intuitive way of thinking of possible states is that they are the possible combinations of the given numbers, for example (4,6).
+                We only consider one possible state connected to a certain number combination.
+                This is because, as we will later see, we remove states that are not considered possible anymore.
+                By announcing that an agent does not know the numbers, this information is then shared. Therefore, we do not need copies of states with different truth evaluations.
+
+                <h2>
+                    Relations
+                </h2>
+                <p>
                 We then also need to have certain relations between the possible states, so let us say that we are in our example possible state, (4,6), and we have a number limit of 10.
                 The product of these numbers is 24, and their sum is 10. This means that the 'product-possible' states are only (4,6) and (3,8).
                 The 'sum-possible' states are (1,9), (2,8), (3,7), (4,6) and (5,5).
@@ -45,30 +57,14 @@
                 Since we are reasoning about knowledge and considering models that have to be reflexive, euclidean, and transitive, we make use of the corresponding modal logic system S5 for two agents.
                 </p>
                 <p>
-                We can then write, using the usual notation of S5 for two agents, for example, K<sub>A</sub>K<sub>B</sub>p with the meaning 'Alice knows that Bob knows that p'.
+                Since we have reasoned towards the <i> type </i> of models we consider, we are from this point on not constrained to models pertaining only to the number game.
+                In fact, we can construct an entire class of models on which we can play 'Number Games'.
+                The construction of these models can be done with many different rules, of which we also have considered some in the demo.
+                Most interestingly, we do not even need to have any rules about model construction, as long as the model does conform to the reflexive, euclidean, and transitive properties.
+                This even extends to models that do not use states as combinations of numbers, though for clarity we will consider only those kinds of states.
                 </p>
-
-                <div id="step0Network" class="networkClass" style="height: 400pt;"></div>
-                <center><i>Interactive window containing an example model with all states and relations for random numbers in the range [1,6).</i></center>
-
-                <h2>
-                    Epistemic Logic Without Announcements
-                </h2>
                 <p>
-                In order to use formal proofs for the number game we need additional rules to express game specific knowledge. We call these rules N1-N4. 
-                N1 states that the number N_B that Bob receives is the product of the two numbers and N2 expresses that the number N_A that Alice receives 
-                is the sum of both numbers. In addition to this, N3 expresses that Bob only considers the number combinations
-                possible that have a product of N_B and similarly, N4 expresses that Alice only considers number combinations
-                possible that have a sum of N_A.
-
-                An example of a formal proof is shown below. It is assumed that the numbers are below 6 and that Alice received the number 5. The proof shows that if Bob states
-                that he does not know, Alice knows that the numbers are 1 and 4.
-                </p>
-                <img src="../images/easy_example_proof.PNG" alt="An example proof with < x,y <6" style="width:80%;display: block;margin-left: auto;margin-right: auto;">
-                <p>
-                Even though this example shows successfully how knowledge can be derived using these rules, there are major limitations to this method. The problem is that 
-                we can not consider a knowledge that evolves over time. For example Alice may states that she does not know the numbers in the beginning, but later she states
-                that she does know them. This type of non-monotonic can not be represented. This motivates us to use change our model using announcements. 
+                We will use the usual notation of S5 for two agents, for example; K<sub>A</sub>K<sub>B</sub>p, with the meaning 'Alice knows that Bob knows that p'.
                 </p>
 
                 <h2>
@@ -86,17 +82,17 @@
                 </h2>
                 <p>
                 From the transitivity, reflexivity and euclidean properties of our system, it follows that on this model we have the S5 logic with 2 agents, Alice and Bob.
-                However, we also are using the public announcements of `I do not know the numbers' as a way of making logical statements.
+                However, we also are using the public announcements of 'I do not know the numbers' as a way of making logical statements.
                 Therefore, the logic that we will use is the public announcement logic.
                 </p>
                 As a summary; we will represent the Numbers Game by a model that corresponds to the public announcement logic.
-                Such a model we will call M = (S, R, &pi;, P).
+                Such a model we will call M = (S, R, &pi;).
                 The set of states S of this model will (initially) consist of states {<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>|U&le;x&le;y&lt;L, x,y &isin; N}, where L and U are the integer upper and lower bound respectively.
                 The set of relations consists of the transitive, reflexive, and euclidean relations, such that.
                 there is a sum-relation R<sub>A</sub> between <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> and <SPAN STYLE="text-decoration:overline">(u,v)</SPAN> if x+y = u+v,
                 and there is a product-relation R<sub>B</sub> between <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> and <SPAN STYLE="text-decoration:overline">(u,v)</SPAN> if x*y = u*v.
                 We consider the propositions P={(x,y)|<SPAN STYLE="text-decoration:overline">(x,y)</SPAN> &isin; S}.
-                The truth evaluation is given by &pi;<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>(x,y) = T.
+                The truth evaluation of these propositions is given by &pi;<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>(x,y) = T.
                 <p>
                 On this model, we will use the Public Announcement logic PA.
                 We will first create a shorthand notation for 'I know the numbers' for agent i which is: KN<sub>i</sub>n(x,y) = &or;<sub>(x,y)|<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>&isin; S</sub> K(x,y)
@@ -110,11 +106,6 @@
                 In practice, we usually want to figure out whether or not a specific number combination (u,v) is still considered possible. In such a case we check instead:
                 [&not;KN<sub>A</sub>(x,y)][&not;KN<sub>B</sub>(x,y)]...[KN<sub>A</sub>(x,y)]K<sub>B</sub>(u,v).
                 If this propoistion holds, then (u,v) will either already have dropped out, with the statement being vacuously true, or the state will drop out after one more announcement of 'I do not know the numbers', due to it being a singleton.
-                </p>
-                <p>
-                For completeness, we also mention that even though we are sometimes talking about specific worlds in relation to propositions, the framework can be used for any S5-model.
-                The only difference being that we construct a specific model based on mathematical rules about how numbers interact with each other.
-                That is, we can check for these conditions on any model containing at least two agents. However, we consider this specific case for the reason that the model is more rigorously constructed.
                 </p>
             </div>
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
