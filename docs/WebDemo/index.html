@@ -22,57 +22,92 @@
         <div class="row">
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
             <div class="columnText textBox">
-                <div>
-                    The numbers are picked from the range [<div id="Nmin_var" class=nobr>1</div>, <div id="Nmax_var" class=nobr>10</div>) <br>
-                    <div class="nobr" title="Buttons used to change the lower bound of the range of the random numbers considered in the puzzle.">ℹ️</div>
-                    Lower bound: 
-                    <button type="button" onclick="changeDivVal('Nmin_var',  1, min(100, parseInt(document.getElementById('Nmax_var').textContent) - 1), -1);" class=nobr>-</button>
-                    <button type="button" onclick="changeDivVal('Nmin_var',  1, min(100, parseInt(document.getElementById('Nmax_var').textContent) - 1),  1);" class=nobr>+</button>
-                    <br>
-                    <div class="nobr" title="Buttons used to change the upper bound of the range of the random numbers considered in the puzzle.">ℹ️</div>
-                    Upper bound: 
-                    <button type="button" onclick="changeDivVal('Nmax_var',  max(1, parseInt(document.getElementById('Nmin_var').textContent) + 1), 100, -1);" class=nobr>-</button>
-                    <button type="button" onclick="changeDivVal('Nmax_var',  max(1, parseInt(document.getElementById('Nmin_var').textContent) + 1), 100,  1);" class=nobr>+</button>
-                    <br>
+                <div class="row">
+                <!-- Left option column -->
+                <div class="column50">
+                    <!-- Input for the random number bounds -->
+                    <div>
+                        The numbers are picked from the range [<div id="Nmin_var" class=nobr>1</div>, <div id="Nmax_var" class=nobr>10</div>) <br>
+                        <div class="nobr" title="Buttons used to change the lower bound of the range of the random numbers considered in the puzzle.">ℹ️</div>
+                        Lower bound: 
+                        <button type="button" onclick="changeDivVal('Nmin_var',  1, min(100, parseInt(document.getElementById('Nmax_var').textContent) - 1), -1);" class=nobr>-</button>
+                        <button type="button" onclick="changeDivVal('Nmin_var',  1, min(100, parseInt(document.getElementById('Nmax_var').textContent) - 1),  1);" class=nobr>+</button>
+                        <br>
+                        <div class="nobr" title="Buttons used to change the upper bound of the range of the random numbers considered in the puzzle.">ℹ️</div>
+                        Upper bound: 
+                        <button type="button" onclick="changeDivVal('Nmax_var',  max(1, parseInt(document.getElementById('Nmin_var').textContent) + 1), 100, -1);" class=nobr>-</button>
+                        <button type="button" onclick="changeDivVal('Nmax_var',  max(1, parseInt(document.getElementById('Nmin_var').textContent) + 1), 100,  1);" class=nobr>+</button>
+                        <br>
+                    </div>
+                    
+                    <!-- Toggle for transitive relations -->
+                    <div>
+                        <div class="nobr" title="Toggle the rendering of the transitive relations in the network. When tiggled off we only connect each equivalence class in series instead of all to all.">ℹ️</div>
+                        Render transitive relations: 
+                        <input type="checkbox" id="transitiveToggle" class="nobr" checked>
+                    </div>
+            
+                    <!-- Toggle for rendering the model -->
+                    <div>
+                        <div class="nobr" title="Toggle the rendering graphical representation of the model. Note that due to limits in the visualisation library the page might crash for large models. Hence this option can be toggled to remove the visual representation in order to still retreive the list of removed states.">ℹ️</div>
+                        Render graphical model: 
+                        <input type="checkbox" id="renderModelToggle" class="nobr" checked>
+                    </div>
                 </div>
-        
                 
-                <!-- Input for the number of iterations to run the model -->
-                <div> 
-                    <div class="nobr" title="Indicates the number of times the agents anounce that they 'do not know the numbers' in alternating sequence.">ℹ️</div>
-                    Number of iterations to run the model: 
-                    <div id="iter_var" class=nobr>0</div>
-                    <button type="button" onclick="changeDivVal('iter_var',  0, 30, -1);" class=nobr>-</button>
-                    <button type="button" onclick="changeDivVal('iter_var',  0, 30,  1);" class=nobr>+</button>
-                </div>
-        
-                <!-- Toggle for transitive relations -->
-                <div>
-                    <div class="nobr" title="Toggle the rendering of the transitive relations in the network. When tiggled off we only connect each equivalence class in series instead of all to all.">ℹ️</div>
-                    Render transitive relations: 
-                    <input type="checkbox" id="transitiveToggle" class="nobr" checked>
-                </div>
-        
-                <!-- Toggle for rendering the model -->
-                <div>
-                    <div class="nobr" title="Toggle the rendering graphical representation of the model. Note that due to limits in the visualisation library the page might crash for large models. Hence this option can be toggled to remove the visual representation in order to still retreive the list of removed states.">ℹ️</div>
-                    Render graphical model: 
-                    <input type="checkbox" id="renderModelToggle" class="nobr" checked>
-                </div>
+                <!-- Right option column -->
+                <div class="column50">
+                    <!-- Input for the number of iterations to run the model -->
+                    <div> 
+                        <div class="nobr" title="Indicates the number of times the agents anounce that they 'do not know the numbers' in alternating sequence.">ℹ️</div>
+                        Number of iterations to run the model: 
+                        <div id="iter_var" class=nobr>0</div>
+                        <button type="button" onclick="changeDivVal('iter_var',  0, 30, -1);" class=nobr>-</button>
+                        <button type="button" onclick="changeDivVal('iter_var',  0, 30,  1);" class=nobr>+</button>
+                    </div>
 
-                <!-- Toggle for starting agent -->
-                <div >
-                    <div class="nobr" title="Used to indicate which of the agents starts by anoucing that they do not know.">ℹ️</div>
-                    Starting agent: <br>
-                    <input type="radio" id="aliceStart" name="startAgent" value="1" class="nobr">
-                    <label for="aliceStart">Alice (+)</label> <br>
-                    <input type="radio" id="bobStart" name="startAgent" value="2" class="nobr" checked>
-                    <label for="bobStart">Bob (*)</label> <br>
-                </div>
-        
+                    <!-- Dropdownlist for starting agent -->
+                    <div >
+                        <div class="nobr" title="Used to indicate which of the agents starts by anoucing that they do not know.">ℹ️</div>
+                        Starting agent: 
+                        <select name="StartingAgent" id="StartingAgent">
+                            <option value="1">Alice</option>
+                            <option value="2" selected>Bob</option>
+                        </select>
+                    </div>
+
+                    <!-- Dropdownlist for operation Alice -->
+                    <div >
+                        <div class="nobr" title="Used to pick what operation is used to construct the relations of Alice.">ℹ️</div>
+                        Operation Alice: 
+                        <select name="OperationAlice" id="OperationAlice">
+                            <option value="1" selected>x + y</option>
+                            <option value="2">x * y</option>
+                            <option value="3">x^2 + y^2</option>
+                            <option value="4">|x - y|</option>
+                            <option value="5">(x + y) % 6</option>
+                            <option value="6">(x * y) % 6</option>
+                        </select>
+                    </div>
+
+                    <!-- Dropdownlist for operation Bob -->
+                    <div >
+                        <div class="nobr" title="Used to pick what operation is used to construct the relations of Bob.">ℹ️</div>
+                        Operation Bob: 
+                        <select name="OperationBob" id="OperationBob">
+                            <option value="1">x + y</option>
+                            <option value="2" selected>x * y</option>
+                            <option value="3">x^2 + y^2</option>
+                            <option value="4">|x - y|</option>
+                            <option value="5">(x + y) % 6</option>
+                            <option value="6">(x * y) % 6</option>
+                        </select>
+                    </div>
                 
-                <!-- Button to update model and removed posibilities list -->
-                <button type="button" onclick="setNetwork('Nmin_var', 'Nmax_var', 'iter_var', 'aliceStart', 'bobStart', 'transitiveToggle', 'mynetwork', 'removedList', 'renderModelToggle');">Update model</button>
+                    <!-- Button to update model and removed posibilities list -->
+                    <button type="button" onclick="setNetwork('Nmin_var', 'Nmax_var', 'iter_var', 'StartingAgent', 'OperationAlice', 'OperationBob', 'transitiveToggle', 'mynetwork', 'removedList', 'renderModelToggle');">Update model</button>
+                </div>
+                </div>
             </div>
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
         </div>
@@ -81,7 +116,6 @@
 
 
         <!-- Block containing network and column to output removed values at each iteration -->
-        <hr>
         <div class="row">
             <div class="column48">
                 <h2>Model:</h2>
@@ -94,5 +128,35 @@
             </div>
         </div>
         <hr>
+
+        <div class="row">
+            <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
+            <div class="columnText textBox">
+                <h1>
+                    Demo explanation
+                </h1>
+                <p>
+                    The demo provides an interactive and visual way of the puzzle. We will use the visualization to help with a better understanding of the model and properties that we observe.
+                </p>
+        
+                <h2>
+                    Explaining the model
+                </h2>
+                <p>
+                    By default a Kripke model will be shown for the random numbers [1,10). In this model each state represents a possible combination of random numbers. We define states to be equivalent for Alice in case they sum to the same value. All states which are equivalent are fully connected by red relations R<sub>A</sub>. Similarly, all states that have the same product are considered equivalent for Bob and are fully connected by blue relations in R<sub>B</sub>.
+                </p>
+
+                <h2>
+                    Iterating the model
+                </h2>
+                <p>
+                    As described in the original explanation of the story, if one of the agents announced that 'they do not know the numbers' then we can remove all the states in which that agent has no relation (apart from the implied reflexive relation). This can be done by incrementing the "Number of iterations to run the model" parameter of the demo. For the convenience of the reader we have also added a section in which all the removed nodes for each step will be printed. Using this we can increment the model step by step and look at the difference in structure of the graph.
+                </p>
+            </div>
+            <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
+        </div>
+
+
+
     </body>
 </html>
