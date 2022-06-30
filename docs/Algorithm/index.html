@@ -34,11 +34,10 @@
                 </p>
 
                 <p>
-                    From this reasoning we can create the following iterative method. We start by assuming agent i announces first, followed by agent j. Then we know that a state (u,v) can be deduced without any announcement if K<sub>i</sub>(u,v) is true, i.e. the state is a singleton or in other words, (u,v) only has a reflexive relation in R<sub>i</sub>. Then we can remove all of the singleton states (from the perspective of agent i) by announcing that we do not know the number, i.e. [¬KN<sub>i</sub>(x,y)]. We can then evaluate [¬KN<sub>i</sub>(x,y)]K<sub>j</sub>(u,v) at each state (u,v) in the model. This statement is true if and only if (u,v) is a singleton or (u,v) was removed during a previous iteration. By keeping track of the new states for which the statement is true we can find which states are removed during which iteration. The pseudocode to do this is shown below.
+                    From this reasoning we can create the following iterative method. We start by assuming agent i announces first, followed by agent j. Then we know that a state (u,v) can be deduced without any announcement if K<sub>i</sub>(u,v) is true, i.e. the state is a singleton or in other words, (u,v) only has a reflexive relation in R<sub>i</sub>. Then we can remove all of the singleton states (from the perspective of agent i) by announcing that we do not know the number, i.e. [¬KN<sub>i</sub>(x,y)]. We can then evaluate [¬KN<sub>i</sub>(x,y)]K<sub>j</sub>(u,v) at each state (u,v) in the model. This statement is true if and only if (u,v) is a singleton or (u,v) was removed during a previous iteration. By keeping track of the new states for which the statement is true we can find which states are removed during which iteration.
                 </p>
 
             </p>
-            <img src="../images/Pseudocode.PNG" alt="Pseudocode for the algorithm" style="width:80%;display: block;margin-left: auto;margin-right: auto;">
             <p>
 
                 <p>
@@ -73,8 +72,9 @@
                     We will loop until no states are removed for 2 consecutive iterations. We loop over the map of <i>product</i>/<i>sum</i> (depending on the starting agent) and remove all pairs which are the only pair corresponding to a <i>product</i>/<i>sum</i> value. In other words, we remove all states which do not have a relation to another state.
                 </p>
                 <p>
-                    Then we recompute the <i>product</i> and <i>sum</i> value between each step. It is recommended to also keep track of which nodes were removed during which step of the iteration in order to obtain the list of solvable initial conditions and after how many steps they are solved.
+                    Then we recompute the <i>product</i> and <i>sum</i> value between each step. It is recommended to also keep track of which nodes were removed during which step of the iteration in order to obtain the list of solvable initial conditions and after how many steps they are solved. The pseudocode to do this is shown below.
                 </p>
+                <img src="../images/Pseudocode.PNG" alt="Pseudocode for the algorithm" style="width:80%;display: block;margin-left: auto;margin-right: auto;">
 
             </div>
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
