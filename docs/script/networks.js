@@ -50,7 +50,7 @@ function setNetwork(NminVarId, NmaxVarId, iterVarId, startingAgentID, opAId, opB
     // Create network and render results
     if (renderModel)
         createNetwork(networkId, ret[0], ret[1]);
-    renderRemovedNodes(ret[2], removedListId, startingAgent);
+    renderRemovedNodes(ret[2], removedListId, startingAgent, ret[3]);
 }
 
 // Create network from variable input

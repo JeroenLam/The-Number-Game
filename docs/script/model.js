@@ -154,6 +154,8 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle, opA, opB)
         for (let y = x; y < Nmax; ++y)
             candidate_pairs.add([x, y]);
     
+    totalNodes = candidate_pairs.size;
+            
     // Swap between hearing from the agents every round (product or sum)
     if (startingAgent == 1) // Alice
         turn_bob = false;
@@ -301,22 +303,25 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle, opA, opB)
     }
 
 
-    return [nodes, edges, removedNodes];
+    return [nodes, edges, removedNodes, totalNodes];
 }
 
-function renderRemovedNodes(removedNodes, removedListId, startingAgent)
+function renderRemovedNodes(removedNodes, removedListId, startingAgent, totalNodes)
 {
     const element = document.getElementById(removedListId);
     element.innerHTML = "";
+
+    removedCount = 0;
     // Create output string by looping over elements
     for (let idx = 0, max = removedNodes.length; idx < max; ++idx)
     {
+        removedCount += removedNodes[idx].length;
         text = ""
         if ((idx + startingAgent) % 2 == 0)
         {
             text += "<div class='bobRemoved'>";
 
-            text += "<p>" + (idx + 1) + ") Bob: I do not know the numbers:</p>";
+            text += "<p>" + (idx + 1) + ") Bob: I do not know the numbers: (removed: " + removedNodes[idx].length + ", Left: " + (totalNodes - removedCount) + "/" + totalNodes + ")</p>";
             removedNodes[idx].forEach (function(pair) {
                 text += "(" + pair[0] + "," + pair[1] + "), ";
             });
@@ -326,7 +331,7 @@ function renderRemovedNodes(removedNodes, removedListId, startingAgent)
         else
         {
             text += "<div class='aliceRemoved'>";
-            text += "<p>" + (idx + 1) + ") Alice: I do not know the numbers:</p>";
+            text += "<p>" + (idx + 1) + ") Alice: I do not know the numbers: (removed: " + removedNodes[idx].length + ", Left: " + (totalNodes - removedCount) + "/" + totalNodes + ")</p>";
             removedNodes[idx].forEach (function(pair) {
                 text += "(" + pair[0] + "," + pair[1] + "), ";
             });
