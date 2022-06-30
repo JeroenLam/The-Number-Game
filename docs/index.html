@@ -63,35 +63,41 @@
                     <p>
                         Below we will start by providing an example on how this problem can be solved if we look at a simpler variant of the problem. Let us consider the problem in which we pick our random numbers on the interval [1,6) instead of [1,100). Then we can compute the sums and products for all pairs of random numbers in the problem.
                     </p> 
-                    
-                    sums = { <br>
-                        2  : [(1,1)], <br>
-                        3  : [(1,2)], <br>
-                        4  : [(1,3), (2,2)], <br>
-                        5  : [(1,4), (2,3)], <br>
-                        6  : [(1,5), (2,4), (3,3)], <br>
-                        7  : [(2,5), (3,4)], <br>
-                        8  : [(3,5), (4,4)], <br>
-                        9  : [(4,5)], <br>
-                        10 : [(5,5)], <br>
-                    } <br>
-                    products = { <br>
-                        1  : [(1,1)], <br>
-                        2  : [(1,2)], <br>
-                        3  : [(1,3)], <br>
-                        4  : [(1,4), (2,2)], <br>
-                        5  : [(1,5)], <br>
-                        6  : [(2,3)], <br>
-                        8  : [(2,4)], <br>
-                        9  : [(3,3)], <br>
-                        10 : [(2,5)], <br>
-                        12 : [(3,4)], <br>
-                        15 : [(3,5)], <br>
-                        16 : [(4,4)], <br>
-                        20 : [(4,5)], <br>
-                        25 : [(5,5)], <br>
-                    } <br> <br>
-            
+                    <div class="row">
+                        <!-- Left option column -->
+                        <div class="column50">
+                            sums = { <br>
+                                &emsp; 2  : [(1,1)], <br>
+                                &emsp; 3  : [(1,2)], <br>
+                                &emsp; 4  : [(1,3), (2,2)], <br>
+                                &emsp; 5  : [(1,4), (2,3)], <br>
+                                &emsp; 6  : [(1,5), (2,4), (3,3)], <br>
+                                &emsp; 7  : [(2,5), (3,4)], <br>
+                                &emsp; 8  : [(3,5), (4,4)], <br>
+                                &emsp; 9  : [(4,5)], <br>
+                                &emsp; 10 : [(5,5)], <br>
+                            } <br>
+                        </div>
+                        <!-- Right option column -->
+                        <div class="column50">
+                            products = { <br>
+                                &emsp; 1  : [(1,1)], <br>
+                                &emsp; 2  : [(1,2)], <br>
+                                &emsp; 3  : [(1,3)], <br>
+                                &emsp; 4  : [(1,4), (2,2)], <br>
+                                &emsp; 5  : [(1,5)], <br>
+                                &emsp; 6  : [(2,3)], <br>
+                                &emsp; 8  : [(2,4)], <br>
+                                &emsp; 9  : [(3,3)], <br>
+                                &emsp; 10 : [(2,5)], <br>
+                                &emsp; 12 : [(3,4)], <br>
+                                &emsp; 15 : [(3,5)], <br>
+                                &emsp; 16 : [(4,4)], <br>
+                                &emsp; 20 : [(4,5)], <br>
+                                &emsp; 25 : [(5,5)], <br>
+                            } <br> <br>
+                        </div>
+                    </div>
                     <p>
                         We can use this representation to easily find all the states in which an agent 'would know' the numbers. Let us consider the agent Alice and Alice knows that the sum is 8. Then the states (3,5) and (4,4) are equally likely from the perspective of Alice. If we reverse this reasoning, if Alice knows that there is only one possible pair for her sum value, then she knows the original numbers, namely that pair. 
                     </p>
@@ -100,16 +106,23 @@
                     </p>
             
                     removed = { <br>
-                        [(1,1), (1,2), (1,3), (1,5), (2,3), (2,4), (3,3), (2,5), (3,4), (3,5), (4,4), (4,5), (5,5)] <br>
+                        &emsp; [(1,1), (1,2), (1,3), (1,5), (2,3), (2,4), (3,3), (2,5), (3,4), (3,5), (4,4), (4,5), (5,5)] <br>
                     }<br>
-                    sums = { <br>
-                        4  : [(2,2)], <br>
-                        5  : [(1,4)], <br>
-                    } <br>
-                    products = { <br>
-                        4  : [(1,4), (2,2)], <br>
-                    } <br> <br>
-            
+                    <div class="row">
+                        <!-- Left option column -->
+                        <div class="column50">
+                            sums = { <br>
+                                &emsp; 4  : [(2,2)], <br>
+                                &emsp; 5  : [(1,4)], <br>
+                            } <br>
+                        </div>
+                        <!-- Right option column -->
+                        <div class="column50">
+                            products = { <br>
+                                &emsp; 4  : [(1,4), (2,2)], <br>
+                            } <br> <br>
+                        </div>
+                    </div>
                     <p>
                         After Bob stated that he does not know, Alcice will know (If the number that Alice revived was 4, then she would know that it must be the pair (2,2). Similarly, if she recived a 5, hten she knows that the pair is (1,4)). If Bob did know the numbers in the first step then Alice would know that the numbers correspond to a pair in the 'removed' set above. 
                     </p>
