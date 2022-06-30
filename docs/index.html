@@ -23,7 +23,7 @@
                     Introduction
                 </h1>
 
-                    For our project we will consider the following logic puzzle.
+                    For our project we will consider the generalization of the following logic puzzle.
                     <hr>
                     Assume we have 2 agents, Alice and Bob, both are perfect logicians. Let us pick 2 random positive integers smaller than 100. We tell Alice the sum of these numbers and we tell Bob the product of these numbers. Both know this. Then the following conversations occurs between the agents:
                     <br> <br>
@@ -48,7 +48,16 @@
                     What are the numbers?
                     <hr>
 
+                    <h2>
+                        Background of the puzzle
+                    </h2>
+                        <b>TODO: ADD BACKGROUND</b>
+
+                    <h2>
+                        Example on how to solve the problem
+                    </h2>
                     <p>
+<<<<<<< HEAD
                         This problem is also know as the "Sum and Product" problem which is a variation of the  Freudenthal problem presented in 1969 [1]. An formal analysis using Epistemic knowledge for the Sum and Prodct problem model exists for example in [2] <sup>1</sup>.
                     </p>
 
@@ -60,6 +69,10 @@
                         For the sake of explanation, let us assume that the random numbers are chosen between [1,6) instead of [1,100). We will use this reduced example to show how we can reduce the set of possible number combinations for each anounchement. 
                     </p>
                     
+=======
+                        Below we will start by providing an example on how this problem can be solved if we look at a simpler variant of the problem. Let us consider the problem in which we pick our random numbers on the interval [1,6) instead of [1,100). Then we can compute the sums and products for all pairs of random numbers in the problem.
+                    </p>                    
+>>>>>>> 7778044a8b994ee5bb09df19143ed1978f22f746
                     sums = { <br>
                         2  : [(1,1)], <br>
                         3  : [(1,2)], <br>
@@ -89,7 +102,10 @@
                     } <br> <br>
             
                     <p>
-                    Then, when Bob announced that they do not know the numbers, then we know that it is not any product with only a single possible pair. We can then reduce the set of possible pairs by removing all pairs which do not have any other pairs with the same product. This would result in the following sets:
+                        We can use this representation to easily find all the states in which an agent 'would know' the numbers. Let us consider the agent Alice and Alice knows that the sum is 8. Then the states (3,5) and (4,4) are equally likely from the perspective of Alice. If we reverse this reasoning, if Alice knows that there is only one possible pair for her sum value, then she knows the original numbers, namely that pair. 
+                    </p>
+                    <p>
+                        When Bob announces that he does not know the numbers, then we know that it is not any product with only a single possible pair. We can then reduce the set of possible pairs by removing all pairs which do not have any other pairs with the same product. This would result in the following sets:
                     </p>
             
                     removed = { <br>
@@ -104,7 +120,7 @@
                     } <br> <br>
             
                     <p>
-                    If Bob did know the numbers in the first step then Alice would know that the numbers correspond to a pair in the 'removed' set above. Similarly, when Alice announces that they do not know the number, we can remove all pairs for which there does not exist another pair with the same sum from the set of possible pairs. If we do this we get the following sets:
+                    If Bob did know the numbers in the first step then Alice would know that the numbers correspond to a pair in the 'removed' set above. Similarly, when Alice announces that she does not know the number, we can remove all pairs for which there does not exist another pair with the same sum from the set of possible pairs. If we do this we get the following sets:
                     </p>
             
                     removed = { <br>
@@ -115,48 +131,16 @@
                     products = {} <br> <br>
             
                     <p>
-                        This can be repeated to obtain all nodes removed during each step. However, we would like to note that the problem is only solvable for for the 3rd agent in case only a single pair is removed by an announcement. If there are multiple pairs that are removed by the anounchement then the 3rd agent only knows that it is one of these pairs of numbers but not which one, as is the case in our example.
+                        This can be repeated to obtain all pairs removed during each step. However, we would like to note that it is not always the case that all states are removed by this process.
                     </p>
+
+                    <h2>
+                        Overview
+                    </h2>
                     <p>     
-                        As one might imagine this indicates that there are quite significant constraints on the original problem for a solution to exists for a given (fixed) number of 'Agent x does not know the numbers'. Hence we will also be looking an extention of the problem in which we consider ourselves to be one of the agents with knowledge about the received product or sum.
+                        In the next sections (accessible using the bar at the top) we will discuss how we can formulate this problem to epistemic logic as well as looking at how we can create an algorithm that finds all pairs that can be deduced by the agents in both the context of formal logic and a computer algorithm. We have also implemented this algorithm using javascript to provide a visual and interactive demo of the algorithm. Lastly we have added an appendix indicating how the problem can be attempted without using public announcements.
                     </p>
-            
-                    <h1>
-                        From the perspective of an playing agent.
-                    </h1>
-                    <p>
-                    Let's play the game out of Bob's perspective and assume that the number
-                    games is played with x, y being in a range of [1,6)] and we receive a number N<sub>B</sub>
-                    which is 4. Alice receives a number N<sub>A</sub> but this number is unknown for us.
-                    We know that x * y = N<sub>B</sub> and that 0 < x, y < 6. There are two possible
-                    combinations of (x, y) possible which are (2, 2) and (1, 4).
-                    </p>
-            
-                    <p>
-                    If the numbers are (2, 2), then N<sub>A</sub> = 4 and Alice would consider (2, 2) or
-                    (3, 1) as possible. Similarly, if the numbers are (4, 1) then N<sub>A</sub> = 5 and Alice
-                    would consider (4, 1) and (3, 2) as possible. Either way, we know that Alice does
-                    not know the combination.
-                    </p>
-            
-                    <p>
-                    We considers it possible that (2, 2) with N<sub>A</sub> = 4 and Alice considering (2, 2)
-                    and (3, 1). However, if (3, 1) then N<sub>B</sub> = 3 which means that (x, y) must be
-                    (3, 1) (The only possible numbers with a product of 3). Therefore Alice would
-                    consider it possible that we know (3, 1). We consider it possible that Alice
-                    considers it possible that we know the combination.
-                    </p>
-            
-                    <p>
-                    Now, we announce that we do not know (x, y).
-                    Do we still know that Alice does not know (x, y)? We consider it possible
-                    that (2, 2) with N<sub>A</sub> = 4. If N<sub>A</sub> = 4 then Alice would know that either (2, 2)
-                    or (3, 1). However, Alice knows that (3, 1) is not possible because we stated
-                    that we do not know (If (3, 1) then N<sub>B</sub> = 3 and we would know since the only
-                    possible product is (1, 3)). Therefore Alice would eliminate (3, 1) and conclude
-                    the only possible option which is (2, 2). Therefore should we should consider it
-                    possible that Alice knows (2, 2).
-                    </p>
+<<<<<<< HEAD
             
                     <p>
                     Do we know that Alice knows (x, y)? We consider (2, 2) and (4, 1) as possible.
@@ -206,6 +190,8 @@
                     [2] van Ditmarsch H.P., Ruan J., Verbrugge L.C. (2005) Model Checking Sum and Product. In: Zhang S., Jarvis R. (eds) AI 2005: Advances in Artificial Intelligence. AI 2005. Lecture Notes in Computer Science, vol 3809. Springer, Berlin, Heidelberg
                     </p>
                 
+=======
+>>>>>>> 7778044a8b994ee5bb09df19143ed1978f22f746
             </div>
             <div class="columnPadding"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
 
