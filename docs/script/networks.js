@@ -63,7 +63,7 @@ function setNetwork(NminVarId, NmaxVarId, iterVarId, startingAgentID, opAId, opB
 function drawNetwork(Nmin, Nmax, iter, startingAgent, transBool, networkId)
 {   
     // Run simulation
-    ret = find_pairs(Nmin, Nmax, iter, startingAgent, transBool);
+    ret = find_pairs(Nmin, Nmax, iter, startingAgent, transBool, 1, 2);
 
     // Create network and render results
     createNetwork(networkId, ret[0], ret[1]);

@@ -87,10 +87,10 @@
                 Such a statement will be of form [&not;KN<sub>A</sub>(x,y)][&not;KN<sub>B</sub>(x,y)]...[KN<sub>i</sub>(x,y)]KN<sub>i+1</sub>(x,y). Where i can be A(lice) or B(ob), and i+1 B(ob) or A(lice).
                 As an example, let's say Alice says she does not know, Bob says he does not know, and then Alice knows. Then we get the statement form:
                 [&not;KN<sub>A</sub>(x,y)][&not;KN<sub>B</sub>(x,y)][KN<sub>A</sub>(x,y)]KN<sub>B</sub>(x,y).
-                Where we have to check if for some specific proposition <b>(x,y)</b> in the model, this statement holds at all states.
-                In practice, we usually want to figure out whether or not a specific number combination <b> (x,y) </b> is still considered possible. In such a case we check instead:
-                [&not;KN<sub>A</sub>(x,y)][&not;KN<sub>B</sub>(x,y)]...[KN<sub>A</sub>(x,y)]K<sub>B</sub><b>(x,y)</b>.
-                If this propoistion holds, then <b> (x,y) </b> will either already have dropped out, with the statement being vacuously true, or the state will drop out after one more announcement of 'I do not know the numbers', due to it being a singleton.
+                Where we have to check if for some specific proposition (u,v) in the model, this statement holds at all states.
+                In practice, we usually want to figure out whether or not a specific number combination (u,v) is still considered possible. In such a case we check instead:
+                [&not;KN<sub>A</sub>(x,y)][&not;KN<sub>B</sub>(x,y)]...[KN<sub>A</sub>(x,y)]K<sub>B</sub>(u,v).
+                If this propoistion holds, then (u,v) will either already have dropped out, with the statement being vacuously true, or the state will drop out after one more announcement of 'I do not know the numbers', due to it being a singleton.
                 </p>
                 <p>
                 For completeness, we also mention that even though we are sometimes talking about specific worlds in relation to propositions, the framework can be used for any S5-model.
