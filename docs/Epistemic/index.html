@@ -36,24 +36,27 @@
                 <p>
                 To think about the logic underlying the number game, we first want to find a logical system supporting the number game.
                 Therefore, we first look at what kind of models we are considering.
-                The most intuitive way of thinking of possible states is that they are the possible combinations of the given numbers, for example (4,6).
-                We only consider one possible state connected to a certain number combination.
+                An intuitive way of thinking of possible states is that they represent the possible combinations of the given numbers, for example (4,6).
+                We only consider one possible state representing for each number combination.
                 This is because, as we will later see, we remove states that are not considered possible anymore.
-                By announcing that an agent does not know the numbers, this information is then shared. Therefore, we do not need copies of states with different truth evaluations.
+                This means that we do not need states in a model with different truth evaluations or relations, as will become clearer later on.
 
                 <h2>
                     Relations
                 </h2>
                 <p>
-                We then also need to have certain relations between the possible states, so let us say that we are in our example possible state, (4,6), and we have a number limit of 10.
+                We then also need to have certain relations between the possible states.
+                Let us consider the random numbers picked from 1 to 10 and let us consider the state (4,6).
                 The product of these numbers is 24, and their sum is 10. This means that the 'product-possible' states are only (4,6) and (3,8).
                 The 'sum-possible' states are (1,9), (2,8), (3,7), (4,6) and (5,5).
-                We see that in a specific state, we have two types of connections; those connecting to states with the same sum, and those connecting to states with the same product.
-                Since we have that the product and the sum of the numbers in a certain possible state are always the same, these relations, and therefore every possible model will always be reflexive.
-                It is also given that if a state, for example (5,5) has a sum relation with (4,6), then there is also a sum-relation between (4,6) and (5,5); models have to be Euclidean.
-                Additionally, we see that when we create a list of accessible states, they have some property that they share. Either their sum or their product will be the same.
-                This implies that from the 'sum-possible' states when there is a 'sum'-connection between (4,6) and (5,5) and between (4,6) and (3,7), there has to be a connection between (5,5) and (3,7) because they all add up to 10.
-                Models that we are considering therefore also have to be transitive.
+                We will connect each state which has the same sum with a relation from Alice and all states with the same product with a relation from Bob.
+                
+                Since all states have a relation to each state with the same sum or product, it will always have a relation to itself. Hence the model is reflexive.
+
+                Assume we have 3 states where the in which there exists a relation from the first state to the second and from the second to the third. Then we know that the first and the second state have the same sum or product. We also know that the second and thirst have the same product or sum. Hence the first and the third also have the same sum or pruduct and thus we can conclude that the model is transitive.
+
+                Lastly, we also have that if a state has a relation to another state, then they have the same product or sum. Hence there will also be a relation in the other direction, i.e. the model is Euclidean.
+
                 Since we are reasoning about knowledge and considering models that have to be reflexive, euclidean, and transitive, we make use of the corresponding modal logic system S5 for two agents.
                 </p>
                 <p>
@@ -66,9 +69,6 @@
                 <p>
                 We will use the usual notation of S5 for two agents, for example; K<sub>A</sub>K<sub>B</sub>p, with the meaning 'Alice knows that Bob knows that p'.
                 </p>
-                <p>
-                We can then write, using the usual notation of S5 for two agents, for example, K<sub>A</sub>K<sub>B</sub>p with the meaning 'Alice knows that Bob knows that p'.
-                </p>
 
                 <div id="step0Network" class="networkClass" style="height: 400pt;"></div>
                 <center><i>Interactive window containing an example model with all states and relations for random numbers in the range [1,6).</i></center>
@@ -77,10 +77,11 @@
                     Truth valuations
                 </h2>
                 <p>
-                We now have defined the types of relations we allow, as well as the way that our states are structured. What is left is to create a valuation at the possible states. The kind of statements that we wish to make.
-                Within the game we are considering, the only possible proposition at a state is 'this is the true state'. In all the states we consider possible, however, we do not know whether or not it is the real state.
-                Instead of using a proposition like 'this is the true state', at each state we will have a corresponding proposition that holds there.
-                That is, at any state <SPAN STYLE="text-decoration:overline">(x,y)</SPAN>, we have a proposition (x,y) that is true there.
+                We now have defined the types of relations we allow, as well as the way that our states are structured. What is left is to create a valuation at the possible states. <!-- The kind of statements that we wish to make. -->
+                Every state corresponds to a possible combination of numbers. For a number combination to be possible, that number combination has to be the actual one according to the state.
+                We can then derive that to be the true state, if there are no connections to different states.
+                Instead of using a proposition at state <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> corresponding to 'the numbers are x and y', at each state we will have such a corresponding proposition that holds there.
+                That is, at any state <SPAN STYLE="text-decoration:overline">(x,y)</SPAN>, &pi;<SPAN STYLE="text-decoration:overline">((x,y))</SPAN>(x,y) = T.
                 </p>
 
                 <h2>
@@ -93,24 +94,22 @@
                 </p>
                 As a summary; we will represent the Numbers Game by a model that corresponds to the public announcement logic.
                 Such a model we will call M = (S, R, &pi;).
-                The set of states S of this model will (initially) consist of states {<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>|U&le;x&le;y&lt;L, x,y &isin; N}, where L and U are the integer upper and lower bound respectively.
+                The set of states S of this model will (initially) consist of states {<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>|L&le;x&le;y&lt;U, x,y &isin; N}, where U and L are the integer upper and lower bound respectively.
                 The set of relations consists of the transitive, reflexive, and euclidean relations, such that.
                 there is a sum-relation R<sub>A</sub> between <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> and <SPAN STYLE="text-decoration:overline">(u,v)</SPAN> if x+y = u+v,
                 and there is a product-relation R<sub>B</sub> between <SPAN STYLE="text-decoration:overline">(x,y)</SPAN> and <SPAN STYLE="text-decoration:overline">(u,v)</SPAN> if x*y = u*v.
                 We consider the propositions P={(x,y)|<SPAN STYLE="text-decoration:overline">(x,y)</SPAN> &isin; S}.
-                The truth evaluation of these propositions is given by &pi;<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>(x,y) = T.
+                The truth evaluation of these propositions is given by &pi;<SPAN STYLE="text-decoration:overline">((x,y))</SPAN>(x,y) = T.
                 <p>
                 On this model, we will use the Public Announcement logic PA.
-                We will first create a shorthand notation for 'I know the numbers' for agent i which is: KN<sub>i</sub>n(x,y) = &or;<sub>(x,y)|<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>&isin; S</sub> K(x,y)
-                Semantically this means; 
+                We will first create a shorthand notation for 'I know the numbers' for agent i which is: KN<sub>i</sub>(x,y) = &or;<sub>(x,y)|<SPAN STYLE="text-decoration:overline">(x,y)</SPAN>&isin; S</sub> K(x,y)
+                Semantically this means that if a state is a singleton, i.e. only has a reflexive relation in R<sub>i</sub>, then KN<sub>i</sub>(x,y) will be true.
                 We can then phrase the announcements that Alice and Bob make in terms of a public announcement of the form: [&not;KN<sub>i</sub>(x,y)], where i=A for Alice and i=B for Bob.
-                Since we are looking from an outside perspective at the problem, we can then study if it is possible to see if we can find the true world based on the public announcements that were made.
-                Such a statement will be of form [&not;KN<sub>A</sub>(x,y)][&not;KN<sub>B</sub>(x,y)]...[KN<sub>i</sub>(x,y)]KN<sub>i+1</sub>(x,y). Where i can be A(lice) or B(ob), and i+1 B(ob) or A(lice).
-                As an example, let's say Alice says she does not know, Bob says he does not know, and then Alice knows. Then we get the statement form:
-                [&not;KN<sub>A</sub>(x,y)][&not;KN<sub>B</sub>(x,y)][KN<sub>A</sub>(x,y)]KN<sub>B</sub>(x,y).
-                Where we have to check if for some specific proposition (u,v) in the model, this statement holds at all states.
-                In practice, we usually want to figure out whether or not a specific number combination (u,v) is still considered possible. In such a case we check instead:
-                [&not;KN<sub>A</sub>(x,y)][&not;KN<sub>B</sub>(x,y)]...[KN<sub>A</sub>(x,y)]K<sub>B</sub>(u,v).
+                We can then study if it is possible to see if we can find the true world based on the public announcements that were made.
+                Such a statement will be of the form [&not;KN<sub>A</sub>(x,y)][&not;KN<sub>B</sub>(x,y)]...[KN<sub>i</sub>(x,y)]K<sub>i+1</sub>(u,v). Where i can be A(lice) or B(ob), and i+1 B(ob) or A(lice).
+                As an example, let's say Alice says she does not know, Bob says he does not know, and then Alice says she knows. After these announcements, we wish to know if Bob knows that (u,v). Then we get the statement form:
+                [&not;KN<sub>A</sub>(x,y)][&not;KN<sub>B</sub>(x,y)][KN<sub>A</sub>(x,y)]K<sub>B</sub>(u,v)).
+                Where we have to check if for some specific proposition (u,v) in the model, this statement holds at some state. In practice, we only have to check the state <SPAN STYLE="text-decoration:overline">(u,v)</SPAN>, as K<sub>i</sub>(u,v) implies (u,v).
                 If this propoistion holds, then (u,v) will either already have dropped out, with the statement being vacuously true, or the state will drop out after one more announcement of 'I do not know the numbers', due to it being a singleton.
                 </p>
             </div>

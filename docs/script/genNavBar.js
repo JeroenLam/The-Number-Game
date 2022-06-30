@@ -4,7 +4,7 @@ const navBarItems = [
     ["Epistemic logic", "/The-Number-Game/Epistemic"],
     ["Algorithm", "/The-Number-Game/Algorithm"],
     ["Demo", "/The-Number-Game/WebDemo"],
-    ["Apendix", "/The-Number-Game/Apendix"],
+    ["Appendix", "/The-Number-Game/Appendix"],
     ["Github", "https://github.com/JeroenLam/The-Number-Game", "/The-Number-Game/images/GitHub-Mark-32px.png"],
 ];
 
