@@ -34,8 +34,12 @@
                 </p>
 
                 <p>
-                    From this reasoning we can create the following iterative method. We start by assuming agent i announces first, followed by agent j. Then we know that a state (u,v) can be deduced without any announcement if K<sub>i</sub>(u,v) is true, i.e. the state is a singleton or in other words, (u,v) only has a reflexive relation in R<sub>i</sub>. Then we can remove all of the singleton states (from the perspective of agent i) by announcing that we do not know the number, i.e. [¬KN<sub>i</sub>(x,y)]. We can then evaluate [¬KN<sub>i</sub>(x,y)]K<sub>j</sub>(u,v) at each state (u,v) in the model. This statement is true if and only if (u,v) is a singleton or (u,v) was removed during a previous iteration. By keeping track of the new states for which the statement is true we can find which states are removed during which iteration.
+                    From this reasoning we can create the following iterative method. We start by assuming agent i announces first, followed by agent j. Then we know that a state (u,v) can be deduced without any announcement if K<sub>i</sub>(u,v) is true, i.e. the state is a singleton or in other words, (u,v) only has a reflexive relation in R<sub>i</sub>. Then we can remove all of the singleton states (from the perspective of agent i) by announcing that we do not know the number, i.e. [¬KN<sub>i</sub>(x,y)]. We can then evaluate [¬KN<sub>i</sub>(x,y)]K<sub>j</sub>(u,v) at each state (u,v) in the model. This statement is true if and only if (u,v) is a singleton or (u,v) was removed during a previous iteration. By keeping track of the new states for which the statement is true we can find which states are removed during which iteration. The pseudocode to do this is shown below.
                 </p>
+
+            </p>
+            <img src="../images/Pseudocode.PNG" alt="Pseudocode for the algorithm" style="width:80%;display: block;margin-left: auto;margin-right: auto;">
+            <p>
 
                 <p>
                     This process can be repeated by adding alternating announcements for the agent, e.g. [¬KN<sub>i</sub>(x,y)][¬KN<sub>j</sub>(x,y)][¬KN<sub>i</sub>(x,y)][¬KN<sub>j</sub>(x,y)]K<sub>i</sub>(u,v) to find the states which can be deduced at each announcement step. Note that we can stop this process when we find 2 consecutive iterations in which we do not remove any states.
