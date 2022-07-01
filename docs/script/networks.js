@@ -1,12 +1,13 @@
 // create a network
-function createNetwork(elementId, nodes, edges)
+function createNetwork(elementId, nodes, edges, options)
 {
     var container = document.getElementById(elementId);
     var data = {
         nodes: nodes,
         edges: edges
     };
-    var options = {};
+    console.log(data);
+    console.log(options);
     var network = new vis.Network(container, data, options);
 }
 
@@ -16,7 +17,7 @@ function onPageLoad(Nmin, Nmax, iter, networkId)
 {
     // Start with Bob (Agent 2)
     ret = find_pairs(Nmin, Nmax, iter, 2, 1, 1, 2);
-    createNetwork(networkId, ret[0], ret[1]);
+    createNetwork(networkId, ret[0], ret[1], ret[4]);
 }
 
 // Create network from html input
@@ -49,7 +50,7 @@ function setNetwork(NminVarId, NmaxVarId, iterVarId, startingAgentID, opAId, opB
 
     // Create network and render results
     if (renderModel)
-        createNetwork(networkId, ret[0], ret[1]);
+        createNetwork(networkId, ret[0], ret[1], ret[4]);
     renderRemovedNodes(ret[2], removedListId, startingAgent, ret[3]);
 }
 
@@ -66,5 +67,5 @@ function drawNetwork(Nmin, Nmax, iter, startingAgent, transBool, networkId)
     ret = find_pairs(Nmin, Nmax, iter, startingAgent, transBool, 1, 2);
 
     // Create network and render results
-    createNetwork(networkId, ret[0], ret[1]);
+    createNetwork(networkId, ret[0], ret[1], ret[4]);
 }

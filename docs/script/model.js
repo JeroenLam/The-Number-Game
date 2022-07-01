@@ -250,7 +250,8 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle, opA, opB)
                 edges.push({
                     'from': node_lookup.get(baseNode),
                     'to':   node_lookup.get(newNode),
-                    'color': 'rgb(255,0,0)'
+                    'color': 'rgb(255,0,0)',
+                    'width': '3' 
                 });
                 baseNode = newNode;
             }
@@ -264,7 +265,8 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle, opA, opB)
                 edges.push({
                     'from': node_lookup.get(baseNode),
                     'to':   node_lookup.get(newNode),
-                    'color': 'rgb(0,0,255)'
+                    'color': 'rgb(0,0,255)',
+                    'width': '3'
                 });
                 baseNode = newNode;
             }
@@ -283,7 +285,8 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle, opA, opB)
                     edges.push({
                         'from': node_lookup.get(arr[idx1]),
                         'to':   node_lookup.get(arr[idx2]),
-                        'color': 'rgb(255,0,0)'
+                        'color': 'rgb(255,0,0)',
+                        'width': '3'
                     });
                 }
             }
@@ -295,15 +298,17 @@ function find_pairs(Nmin, Nmax, iterations, startingAgent, transTogle, opA, opB)
                     edges.push({
                         'from': node_lookup.get(arr[idx1]),
                         'to':   node_lookup.get(arr[idx2]),
-                        'color': 'rgb(0,0,255)'
+                        'color': 'rgb(0,0,255)',
+                        'width': '3'
                     });
                 }
             }
         });
     }
 
+    var options = {};
 
-    return [nodes, edges, removedNodes, totalNodes];
+    return [nodes, edges, removedNodes, totalNodes, options];
 }
 
 function renderRemovedNodes(removedNodes, removedListId, startingAgent, totalNodes)
